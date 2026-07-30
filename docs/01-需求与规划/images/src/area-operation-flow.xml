@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io">
+  <diagram id="area-op" name="地图区域管理 — 用户操作流程">
+    <mxGraphModel dx="800" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="920" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b0b8c0;startSize=30;fontSize=14;fontStyle=1;" value="地图区域管理 — 用户操作流程" vertex="1">
+          <mxGeometry x="10" y="10" width="880" height="900" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="进入地图区域管理页面" vertex="1">
+          <mxGeometry x="350" y="50" width="180" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="新增区域 / 编辑已有区域" vertex="1">
+          <mxGeometry x="350" y="120" width="180" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="填写区域名称、类型、有效期" vertex="1">
+          <mxGeometry x="330" y="190" width="220" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="地图上绘制区域范围" vertex="1">
+          <mxGeometry x="325" y="260" width="230" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4a" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;" value="绘点 / 绘线 / 绘面 / 导入GeoJSON/KML" vertex="1">
+          <mxGeometry x="300" y="310" width="280" height="28" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="绑定预警规则（可选）" vertex="1">
+          <mxGeometry x="340" y="370" width="200" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n6" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="提交保存" vertex="1">
+          <mxGeometry x="370" y="440" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n7" parent="2" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="需要审批？" vertex="1">
+          <mxGeometry x="390" y="510" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n8" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="状态变更为待审批" vertex="1">
+          <mxGeometry x="600" y="520" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n9" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="审批通过，区域生效" vertex="1">
+          <mxGeometry x="350" y="600" width="180" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n10" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="区域在地图上渲染展示" vertex="1">
+          <mxGeometry x="345" y="670" width="190" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n11" parent="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="结束" vertex="1">
+          <mxGeometry x="405" y="740" width="70" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="2" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="2" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="2" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="2" source="n4" target="n4a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="2" source="n4a" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="2" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="2" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="2" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="2" source="n7" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="2" source="n8" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0;exitY=1;entryX=1;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="2" source="n9" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="2" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io">
+  <diagram id="bl-op" name="身份识别预警 — 用户操作流程">
+    <mxGraphModel dx="800" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b0b8c0;startSize=30;fontSize=14;fontStyle=1;" value="身份识别预警 — 用户操作流程" vertex="1">
+          <mxGeometry x="10" y="10" width="880" height="680" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="新增黑名单" vertex="1">
+          <mxGeometry x="260" y="50" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="批量导入Excel" vertex="1">
+          <mxGeometry x="480" y="50" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="填写信息+选择等级" vertex="1">
+          <mxGeometry x="260" y="120" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="MMSI去重校验" vertex="1">
+          <mxGeometry x="480" y="120" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="保存入库" vertex="1">
+          <mxGeometry x="440" y="190" width="100" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n6" parent="2" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="启用规则？" vertex="1">
+          <mxGeometry x="280" y="260" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n7" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="规则生效" vertex="1">
+          <mxGeometry x="180" y="340" width="100" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n8" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="目标出现时触发告警" vertex="1">
+          <mxGeometry x="170" y="410" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n9" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" value="不同等级差异化推送" vertex="1">
+          <mxGeometry x="170" y="480" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n10" parent="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="结束" vertex="1">
+          <mxGeometry x="205" y="550" width="70" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="2" source="n1" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="2" source="n2" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="2" source="n3" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=1;exitY=0.5;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="2" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0;exitY=0.5;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="2" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="2" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="2" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="2" source="n8" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="2" source="n9" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

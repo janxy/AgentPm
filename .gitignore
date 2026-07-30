@@ -1,4 +1,10 @@
 node_modules
 dist
 dist.zip
-docs
+.agents
+.claude
+.codex
+.cursor
+.gemini
+.kiro
+.trae

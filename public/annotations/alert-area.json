@@ -1,5 +1,5 @@
 {
-  "page": "/alert/area",
+  "page": "alert-area",
   "title": "地图区域管理",
   "updatedAt": "2026-07-30",
   "annotations": [
@@ -102,11 +102,12 @@
         "y": 0
       },
       "title": "新增区域",
-      "content": "点击打开编辑窗口，填写区域信息并在地图上绘制区域范围。新增的区域保存后直接生效。保存成功提示“新增成功”。",
+      "content": "<p>点击打开编辑窗口，填写区域信息并在地图上绘制区域范围。新增的区域保存后直接生效。保存成功提示“新增成功”。1111</p>",
       "category": "action",
       "source": "SRS 3.5.1 新增功能",
       "container": "",
-      "createdAt": "2026-07-30"
+      "createdAt": "2026-07-30",
+      "color": ""
     },
     {
       "id": "annot-alert-area-action-approval",
