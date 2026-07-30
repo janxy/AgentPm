@@ -1,0 +1,5 @@
+interface:
+  display_name: "gpt-image-generator"
+  short_description: "调用 OpenAI Images API 形式的服务生成或编辑图片（通用，不绑定特定服务商或模型）。当用户要求\"AI 生图\"\"文生图\"\"生成一张图\"\"用 gpt"
+policy:
+  allow_implicit_invocation: true

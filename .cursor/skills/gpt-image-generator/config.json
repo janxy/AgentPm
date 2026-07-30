@@ -1,0 +1,12 @@
+{
+  "_说明": "生图配置。baseURL/model 已预置默认值，只需填 apiKey。可用环境变量 GPT_IMAGE_BASE_URL / GPT_IMAGE_API_KEY / GPT_IMAGE_MODEL 覆盖。",
+  "baseURL": "https://ai.axuremart.com/v1",
+  "apiKey": "你的API key",
+  "model": "gpt-image-2",
+  "defaults": {
+    "size": "1536x1024",
+    "quality": "high",
+    "n": 1
+  },
+  "outputDir": "output/images"
+}

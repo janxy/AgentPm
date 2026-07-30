@@ -1,0 +1,532 @@
+{
+  "page": "/alert/area",
+  "title": "地图区域管理",
+  "updatedAt": "2026-07-30",
+  "annotations": [
+    {
+      "id": "annot-alert-area-filter",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "筛选区域",
+      "content": "支持按区域名称（模糊搜索）、区域类型（重点区域/禁入区域/巡检区域）、状态（生效/待审批/已失效）筛选，条件之间为“与”关系。点击搜索触发查询，点击重置清空条件。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-filter-name",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter-name",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域名称筛选",
+      "content": "输入区域名称关键字，支持模糊搜索匹配。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-filter-type",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter-type",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域类型筛选",
+      "content": "下拉选择区域类型：重点区域（橙色）、禁入区域（红色）、巡检区域（蓝色）。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-filter-status",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter-status",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "状态筛选",
+      "content": "下拉选择状态：生效（绿色）、待审批（黄色）、已失效（灰色）。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-filter-search",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter-search",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "搜索按钮",
+      "content": "点击触发查询，按当前筛选条件刷新区域列表。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-filter-reset",
+      "type": "selector",
+      "selector": ".annot-alert-area-filter-reset",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "重置按钮",
+      "content": "点击清空所有筛选条件，恢复默认查询。",
+      "category": "filter",
+      "source": "SRS 3.5.1 查询/筛选",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-action-add",
+      "type": "selector",
+      "selector": ".annot-alert-area-action-add",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "新增区域",
+      "content": "点击打开编辑窗口，填写区域信息并在地图上绘制区域范围。新增的区域保存后直接生效。保存成功提示“新增成功”。",
+      "category": "action",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-action-approval",
+      "type": "selector",
+      "selector": ".annot-alert-area-action-approval",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域变更审批",
+      "content": "显示待审批数量（数字角标），点击打开审批列表。编辑保存后区域变更为“待审批”状态，需指挥员审批通过后方可生效。审批期间原区域仍以原配置生效。",
+      "category": "action",
+      "source": "SRS 3.5.1 审批功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-table",
+      "type": "selector",
+      "selector": ".annot-alert-area-table",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域列表",
+      "content": "展示区域列表，包含：区域名称（点击可定位到地图）、类型（标签：重点区域-橙色/禁入区域-红色/巡检区域-蓝色）、有效期（YYYY-MM-DD至YYYY-MM-DD，过期后自动变更为已失效）、状态（标签：生效-绿色/待审批-黄色/已失效-灰色）、操作（编辑/删除/绑定规则）。列表为空时显示“暂无区域数据”。",
+      "category": "table",
+      "source": "SRS 3.5.1 列表功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-table-delete",
+      "type": "selector",
+      "selector": ".annot-alert-area-table-delete",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "删除区域",
+      "content": "点击弹出确认“确定删除该区域吗？删除后不可恢复。”若该区域已被电子围栏规则关联，阻止删除并提示“该区域已被X条规则关联，删除后关联规则将失效，请先解除绑定”。删除成功提示“删除成功”。",
+      "category": "delete",
+      "source": "SRS 3.5.1 删除功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-pagination",
+      "type": "selector",
+      "selector": ".annot-alert-area-pagination",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "分页",
+      "content": "默认每页10条，支持切换每页数量（10/20/50），支持页码翻页。",
+      "category": "pagination",
+      "source": "SRS 3.5.1 列表功能",
+      "container": "",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-name",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-name",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域名称",
+      "content": "必填，2-50字，系统内全局唯一。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-type",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-type",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "区域类型",
+      "content": "必填，默认选择“重点区域”。可选值：重点区域、禁入区域、巡检区域。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-date",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-date",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "有效期",
+      "content": "必填，日期范围选择，格式YYYY-MM-DD。结束时间必须大于开始时间。过期后区域自动变更为“已失效”状态。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-manager",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-manager",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "负责人",
+      "content": "选填，来源于组织管理中已启用的用户。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-remark",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-remark",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "备注",
+      "content": "选填，不超过200字。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-draw",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-draw",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "绘制区域范围",
+      "content": "必填，点击打开全屏绘制工具箱。支持绘点、绘线、绘面三种方式，也支持导入GeoJSON/KML边界文件。已绘制的区域在小地图中预览，显示面积/顶点信息。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能-区域范围",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-form-minimap",
+      "type": "selector",
+      "selector": ".annot-alert-area-form-minimap",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "小地图预览",
+      "content": "绘制区域范围后，在表单中展示缩略地图预览，显示已绘制的几何图形。",
+      "category": "form",
+      "source": "SRS 3.5.1 新增功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-point",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-point",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "绘点工具",
+      "content": "点击后切换为绘点模式。在地图上单击添加一个点位标记，显示经纬度坐标。再次点击任意位置替换当前点位。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具-绘点",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-line",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-line",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "绘线工具",
+      "content": "点击后切换为绘线模式。在地图上单击添加连续的线段顶点，至少需要2个顶点。显示线段顶点数。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具-绘线",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-polygon",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-polygon",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "绘面工具",
+      "content": "点击后切换为绘面模式。在地图上单击添加多边形顶点，至少需要3个顶点。双击或点击首顶点闭合多边形，实时计算并显示面积（单位自动切换：<0.01km²显示m²，≥0.01km²显示km²）。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具-绘面",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-import",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-import",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "导入边界文件",
+      "content": "上传GeoJSON或KML边界文件，系统自动解析并渲染到地图上。仅支持的格式：.geojson、.kml、.json。格式错误时提示“文件格式错误，仅支持GeoJSON”。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具-导入边界文件",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-undo",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-undo",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "撤销上一步",
+      "content": "撤销最近一次添加的顶点。无顶点可撤销时按钮置灰不可用。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-clear",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-clear",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "清除全部",
+      "content": "清除当前所有绘制的图形和顶点，恢复到空白地图状态。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-info",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-info",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "面积/顶点信息",
+      "content": "实时显示当前绘制的几何信息：绘面时显示面积（km²或m²），绘线时显示顶点数，绘点时显示经纬度坐标。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-basemap",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-basemap",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "底图切换",
+      "content": "支持切换底图类型：矢量地图（OpenStreetMap默认底图）和卫星影像（ArcGIS卫星底图）。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-map",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-map",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "地图绘制画布",
+      "content": "基于Leaflet的交互式地图画布。单击地图添加顶点（当前绘制模式下），已绘制区域以半透明填充和边框高亮展示。编辑模式下回显已有区域。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-save",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-save",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "保存区域（绘制）",
+      "content": "将当前绘制的几何图形保存为区域范围数据。未绘制任何有效图形时按钮置灰不可点击。保存后关闭绘制弹窗，并在表单中显示小地图预览。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-draw-cancel",
+      "type": "selector",
+      "selector": ".annot-alert-area-draw-cancel",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "取消绘制",
+      "content": "取消当前的绘制操作，关闭绘制弹窗，不保存任何绘制内容。",
+      "category": "draw",
+      "source": "SRS 3.5.1 地图绘制工具",
+      "container": "drawer",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-bind-rules",
+      "type": "selector",
+      "selector": ".annot-alert-area-bind-rules",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "绑定预警规则列表",
+      "content": "勾选已创建的电子围栏规则（数据来源于预警规则管理-电子围栏）。每行显示规则名称，勾选后可设置触发等级。若无可用的围栏规则，显示“暂无可用围栏规则”。",
+      "category": "bind",
+      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-bind-level",
+      "type": "selector",
+      "selector": ".annot-alert-area-bind-level",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "触发等级",
+      "content": "勾选规则后显示触发等级下拉选择：提示、一般、重要、紧急。每条已勾选的规则独立设置等级。",
+      "category": "bind",
+      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-bind-save",
+      "type": "selector",
+      "selector": ".annot-alert-area-bind-save",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "保存绑定",
+      "content": "保存选中的规则绑定关系及触发等级设置。",
+      "category": "bind",
+      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-approval-table",
+      "type": "selector",
+      "selector": ".annot-alert-area-approval-table",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "审批列表",
+      "content": "展示区域变更审批记录，包含：区域名称、变更内容（修改前/后对比展示，变更部分高亮/灰色划除）、提交人、提交时间、操作（通过/驳回）。",
+      "category": "approval",
+      "source": "SRS 3.5.1 审批功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-approval-pass",
+      "type": "selector",
+      "selector": ".annot-alert-area-approval-pass",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "审批通过",
+      "content": "点击后区域变更为“生效”状态，区域以新配置生效。已审批的记录显示“已通过”标签。",
+      "category": "approval",
+      "source": "SRS 3.5.1 审批功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "annot-alert-area-approval-reject",
+      "type": "selector",
+      "selector": ".annot-alert-area-approval-reject",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "审批驳回",
+      "content": "点击后恢复为修改前状态，修改内容不生效。已驳回的记录显示“已驳回”标签。",
+      "category": "approval",
+      "source": "SRS 3.5.1 审批功能",
+      "container": "dialog",
+      "createdAt": "2026-07-30"
+    }
+  ]
+}

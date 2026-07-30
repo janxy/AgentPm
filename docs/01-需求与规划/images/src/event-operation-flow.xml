@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="draw.io">
+  <diagram id="ev-op" name="事件闭环管理 — 用户操作流程">
+    <mxGraphModel dx="800" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#b0b8c0;startSize=30;fontSize=14;fontStyle=1;" value="事件闭环管理 — 用户操作流程" vertex="1">
+          <mxGeometry x="10" y="10" width="880" height="780" as="geometry"/>
+        </mxCell>
+        <mxCell id="n1" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;" value="接收告警事件" vertex="1">
+          <mxGeometry x="360" y="50" width="160" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n2" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="查看事件详情与关联目标" vertex="1">
+          <mxGeometry x="320" y="120" width="240" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n3" parent="2" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="有效告警？" vertex="1">
+          <mxGeometry x="390" y="190" width="100" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="n4" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="确认有效，创建事件" vertex="1">
+          <mxGeometry x="590" y="200" width="150" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n5" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;fontSize=12;" value="标记误报" vertex="1">
+          <mxGeometry x="200" y="200" width="100" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n6" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="派发处置任务" vertex="1">
+          <mxGeometry x="350" y="270" width="180" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n7" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="协同处置（设备联动/视频查看）" vertex="1">
+          <mxGeometry x="310" y="340" width="260" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n8" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="处置完成，填写处置结论" vertex="1">
+          <mxGeometry x="320" y="410" width="240" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n9" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="申请闭环" vertex="1">
+          <mxGeometry x="360" y="480" width="140" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n10" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="审核通过，事件归档" vertex="1">
+          <mxGeometry x="340" y="550" width="200" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="n11" parent="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="结束" vertex="1">
+          <mxGeometry x="405" y="620" width="70" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="2" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="2" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="2" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="2" source="n3" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0;exitY=0.5;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="2" source="n4" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;exitX=0;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="2" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="2" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="2" source="n8" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="2" source="n9" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="2" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

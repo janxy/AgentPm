@@ -1,0 +1,265 @@
+{
+  "page": "alert-event",
+  "title": "事件闭环管理",
+  "updatedAt": "2026-07-30",
+  "annotations": [
+    {
+      "id": "ann-event-001",
+      "type": "selector",
+      "selector": ".annot-alert-event-reception-stats",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "统计卡片（报警接收）",
+      "content": "展示四项核心指标，点击可快速筛选对应状态的事件：\n- 待核验：新告警待确认有效性\n- 处置中：已确认有效正在处置\n- 今日闭环：当天完成闭环的数量\n- 超时未处理：超过设定时限仍未处理的事件",
+      "category": "display",
+      "source": "SRS 3.5.3 事件闭环管理 - 报警接收展示",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-002",
+      "type": "selector",
+      "selector": ".annot-alert-event-reception-filter",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "筛选区（报警接收）",
+      "content": "支持多条件筛选告警事件：\n- 目标名称/MMSI：模糊搜索\n- 告警级别：紧急/重要/一般/提示\n- 事件状态：待核验/处置中/已闭环/已归档\n\n点击\"查询\"触发筛选，\"重置\"清空条件。右侧\"推送配置\"按钮可配置告警推送规则。",
+      "category": "filter",
+      "source": "SRS 3.5.3 事件闭环管理 - 查询/筛选",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-003",
+      "type": "selector",
+      "selector": ".annot-alert-event-push-btn",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "推送配置入口",
+      "content": "打开推送配置抽屉，可配置：\n- 推送方式：弹窗/短信/邮件/钉钉/微信（多选）\n- 告警级别过滤：按级别决定哪些告警需要推送\n- 推送频率：实时/5分钟/15分钟/每小时\n- 接收人：指定推送接收人员\n- 静默时段：设置不推送的时间段",
+      "category": "action",
+      "source": "SRS 3.5.3 事件闭环管理 - 推送配置",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-004",
+      "type": "selector",
+      "selector": ".annot-alert-event-reception-table",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "告警事件列表",
+      "content": "实时展示所有告警事件，自动刷新。列表列包含：\n- 告警级别：紧急（红）/重要（橙）/一般（蓝）/提示（灰）\n- 目标名称、MMSI\n- 触发规则：命中预警规则的名称\n- 触发位置：经纬度 + 地址\n- 触发时间\n- 状态：待核验/处置中/已闭环/已归档\n- 是否误报\n- 快速操作：根据当前状态显示对应操作按钮\n\n列表为空时显示\"暂无告警数据\"。",
+      "category": "table",
+      "source": "SRS 3.5.3 事件闭环管理 - 报警接收展示",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-005",
+      "type": "selector",
+      "selector": ".annot-alert-event-reception-actions",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "快速操作列",
+      "content": "根据事件当前状态展示对应操作：\n- 待核验：签收 / 派发 / 标记误报\n- 处置中：闭环 / 标记误报\n- 已闭环：归档\n- 所有状态：查看详情\n\n点击详情可查看完整事件信息和操作时间线。\n已归档的事件不可再修改和删除。",
+      "category": "action",
+      "source": "SRS 3.5.3 事件闭环管理 - 状态流转",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-006",
+      "type": "selector",
+      "selector": ".annot-alert-event-disposal-filter",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "筛选区（处置流程）",
+      "content": "按事件状态和目标名称/MMSI筛选待处置事件。\n支持状态筛选：待核验/处置中/已闭环/已归档，条件间为\"与\"关系。",
+      "category": "filter",
+      "source": "SRS 3.5.3 事件闭环管理 - 报警处置流程",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-007",
+      "type": "selector",
+      "selector": ".annot-alert-event-disposal-table",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "处置列表",
+      "content": "展示所有待处置的告警事件，支持展开行查看完整操作时间线。列表额外展示：\n- 经办人：当前负责处置的人员\n- 状态流转：可视化展示事件从待核验到归档的完整流转路径\n\n每行可展开查看操作时间线面板，面板内可补充处置备注。\n同一事件不可重复派发至同一人。",
+      "category": "table",
+      "source": "SRS 3.5.3 事件闭环管理 - 报警处置流程",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-008",
+      "type": "selector",
+      "selector": ".annot-alert-event-disposal-timeline",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "操作时间线",
+      "content": "展示事件从生成到当前的全流程操作记录，每步包含：\n- 操作时间\n- 操作人（系统自动记录或人工操作人）\n- 操作类型：生成告警/签收/派发/补充备注/闭环/标记误报/归档\n- 操作说明\n\n系统自动生成的操作（生成告警/超时升级）以空心节点标识，人工操作以实心节点标识。\n底部可输入补充备注并添加时间线记录。",
+      "category": "display",
+      "source": "SRS 3.5.3 事件闭环管理 - 操作时间线",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-009",
+      "type": "selector",
+      "selector": ".annot-alert-event-disposal-statusflow",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "状态流转",
+      "content": "可视化展示事件生命周期四个阶段：\n待核验 → 处置中 → 已闭环 → 已归档\n\n当前所在阶段蓝色高亮标识\"active\"，已完成阶段绿色标识\"done\"，未到达阶段灰色显示。\n\n流转规则：\n- 待核验 → 处置中：签收或派发\n- 处置中 → 已闭环：填写处置结论后闭环\n- 已闭环 → 已归档：确认归档\n- 任意阶段 → 误报：标记为误报后直接闭环\n\n标记为误报的事件不可再流转回处置中状态。",
+      "category": "display",
+      "source": "SRS 3.5.3 事件闭环管理 - 状态流转",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-010",
+      "type": "selector",
+      "selector": ".annot-alert-event-disposal-actions",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "处置操作按钮",
+      "content": "根据事件当前状态提供对应操作：\n- 待核验：签收（确认有效并进入处置）/ 派发（指派处置人员）/ 标记误报\n- 处置中：转派（改派他人）/ 闭环（填写结论完成处置）/ 标记误报\n- 已闭环：归档（归档至历史记录）\n- 已归档：显示\"已完成\"不可操作\n\n超时升级：待核验或处置中超过时限后自动提升告警级别并扩大推送范围。",
+      "category": "action",
+      "source": "SRS 3.5.3 事件闭环管理 - 操作按钮",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-011",
+      "type": "selector",
+      "selector": ".annot-alert-event-fa-stats",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "误报统计卡片",
+      "content": "展示误报治理核心指标：\n- 告警总数：所有规则的告警总量\n- 误报数量：被标记为误报的数量\n- 误报率：误报占比百分比\n\n用于评估整体预警规则的质量和准确性。",
+      "category": "display",
+      "source": "SRS 3.5.3 事件闭环管理 - 误报治理",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-012",
+      "type": "selector",
+      "selector": ".annot-alert-event-fa-table",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "规则维度误报统计",
+      "content": "按规则维度统计误报数据，列包含：\n- 规则名称\n- 规则类型：围栏预警（蓝）/ 行为预警（橙）\n- 告警数：该规则触发的总告警量\n- 误报数：该规则被标记为误报的数量\n- 误报率：百分比，高误报率（>50%红色，>20%橙色）高亮警示\n- 操作：版本管理（查看历史版本并回退）/ 标记误报\n\n用于识别高误报率规则，辅助参数优化决策。",
+      "category": "table",
+      "source": "SRS 3.5.3 事件闭环管理 - 误报治理",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-013",
+      "type": "selector",
+      "selector": ".annot-alert-event-push-drawer",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "推送配置面板",
+      "content": "配置告警推送规则：\n- 推送方式：弹窗/短信/邮件/钉钉/微信（多选）\n- 告警级别过滤：按紧急/重要/一般/提示级别筛选需要推送的告警\n- 推送频率：实时/每5分钟/每15分钟/每小时\n- 接收人：多选指定推送接收人员\n- 静默时段：设置免打扰时间段\n\n配置保存后立即生效，按告警级别匹配推送渠道和人员。",
+      "category": "form",
+      "source": "SRS 3.5.3 事件闭环管理 - 推送配置",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-014",
+      "type": "selector",
+      "selector": ".annot-alert-event-assign-dialog",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "派发/转派弹窗",
+      "content": "将事件指派给具体处置人员：\n- 事件编号、目标名称、触发规则：只读展示\n- 指派给：下拉选择处置人员（支持搜索过滤）\n- 处置建议：选填，输入处置指导意见\n\n同一事件不可重复派发至同一人，重复派发时提示阻止。\n派发成功后事件状态变更为\"处置中\"，被派发人员可见该待办。",
+      "category": "form",
+      "source": "SRS 3.5.3 事件闭环管理 - 派发处置",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-015",
+      "type": "selector",
+      "selector": ".annot-alert-event-close-dialog",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "闭环确认弹窗",
+      "content": "填写处置结论完成闭环：\n- 处置结论：下拉选择（已确认并驱离/核实为正常作业/已移交海警处理/设备误报/其他）\n- 补充说明：选填，不超过200字\n\n闭环后事件状态变更为\"已闭环\"，操作记录写入时间线。\n已闭环的事件可继续归档。",
+      "category": "form",
+      "source": "SRS 3.5.3 事件闭环管理 - 闭环归档",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-016",
+      "type": "selector",
+      "selector": ".annot-alert-event-falsealarm-dialog",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "标记误报弹窗",
+      "content": "将告警事件标记为误报：\n- 告警事件：显示目标名称和触发规则（只读）\n- 误报原因：下拉选择（算法误判/传感器异常/数据延迟/人为操作失误/环境干扰/其他）\n- 详细说明：选填，不超过300字\n\n标记为误报后事件直接闭环，不可再流转回处置中状态。\n误报数据同步进入误报治理统计。",
+      "category": "form",
+      "source": "SRS 3.5.3 事件闭环管理 - 标记误报",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-017",
+      "type": "selector",
+      "selector": ".annot-alert-event-detail-dialog",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "事件详情弹窗",
+      "content": "展示事件的完整信息：\n- 基本信息：事件编号、目标MMSI、目标名称、触发规则\n- 告警信息：告警级别、事件状态、触发时间\n- 位置信息：触发位置坐标、位置描述\n- 处置信息：经办人、是否误报\n- 误报信息：误报原因、误报说明（仅误报事件展示）\n- 操作时间线：完整的事件流转记录\n\n所有字段只读展示，不可编辑。",
+      "category": "display",
+      "source": "SRS 3.5.3 事件闭环管理 - 事件详情",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    },
+    {
+      "id": "ann-event-018",
+      "type": "selector",
+      "selector": ".annot-alert-event-version-dialog",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "版本管理弹窗",
+      "content": "查看规则的修改历史版本，支持回退：\n\n版本列表：\n- 版本号：v1/v2/v3...\n- 变更说明\n- 操作人\n- 变更时间\n- 操作：回退按钮\n\n回退操作：确认后将规则参数恢复到所选历史版本快照。\n回退操作本身不生成新版本号，直接恢复历史快照。\n版本记录不可删除，仅随规则删除而清理。",
+      "category": "table",
+      "source": "SRS 3.5.3 事件闭环管理 - 版本管理",
+      "container": "modal",
+      "createdAt": "2026-07-30"
+    }
+  ]
+}

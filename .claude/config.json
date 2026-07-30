@@ -1,0 +1,6 @@
+{
+  "codeReview": {
+    "_comment": "code-reviewer 门禁模式。off=完全不审(门禁+提醒静默,想审手动 /review); background=审但后台跑不阻塞回合,跑完异步汇报(默认); blocking=达到阈值当场审完才放行",
+    "mode": "background"
+  }
+}

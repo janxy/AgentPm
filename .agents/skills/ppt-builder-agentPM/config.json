@@ -1,0 +1,12 @@
+{
+  "_说明": "可编辑PPT重建配置。venv 为本技能自带的 Python 环境（含 python-pptx/Pillow/numpy）。可用环境变量 IMG2PPT_PYTHON 覆盖解释器路径。",
+  "python": ".claude/skills/ppt-builder-agentPM/.venv/bin/python",
+  "pythonWindows": ".claude\\skills\\ppt-builder-agentPM\\.venv\\Scripts\\python.exe",
+  "outputDir": "output/ppt",
+  "assetsDir": "output/ppt/assets",
+  "layoutsDir": "output/ppt/layouts",
+  "defaults": {
+    "slide_size": { "width_in": 13.333333, "height_in": 7.5 },
+    "font": "微软雅黑"
+  }
+}
