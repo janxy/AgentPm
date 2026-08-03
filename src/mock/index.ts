@@ -175,3 +175,80 @@ mockRoute('GET', '/admin/alert/false-alarm/stats', () => getFalseAlarmStatsMock(
 // 规则版本
 mockRoute('GET', '/admin/alert/version/list/:ruleId', ({ url }) => getRuleVersionsMock(extractId(url)))
 mockRoute('POST', '/admin/alert/version/rollback', ({ data }) => { return { success: true } })
+
+// ==================== 设备联动 ====================
+import {
+  getDeviceListMock, getDeviceStatsMock, getDeviceDetailMock, updateDeviceHeartbeatMock,
+  getEvidenceListMock, addEvidenceMock, getHailerListMock, addHailerMock, resetDeviceMock
+} from './device'
+import {
+  getOpticDeviceListMock, getOpticStateMock, updateOpticStateMock, controlOpticMock,
+  getPresetListMock, addPresetMock, updatePresetMock, deletePresetMock, callPresetMock,
+  getCruisePlanListMock, saveCruisePlanMock, deleteCruisePlanMock,
+  startCruiseMock, stopCruiseMock, tickCruiseMock, resetOpticMock
+} from './device-optics'
+import {
+  getUavListMock, getUavStateMock, controlUavMock,
+  getUavRouteMock, saveUavRouteMock, getRouteTemplateListMock, saveRouteTemplateMock,
+  getUavTaskListMock, createUavTaskMock, updateUavTaskMock, addUavEventMock, resetUavMock
+} from './device-uav'
+import {
+  getRadarStationListMock, getRadarStationDetailMock, getRadarTargetListMock,
+  updateRadarStationParamsMock, resetRadarMock
+} from './device-radar'
+
+// 设备台账 / 统计 / 取证 / 喊话
+mockRoute('GET', '/admin/device/list', ({ params }) => getDeviceListMock(params))
+mockRoute('GET', '/admin/device/stats', () => getDeviceStatsMock())
+mockRoute('GET', '/admin/device/detail/:id', ({ url }) => getDeviceDetailMock(extractId(url)))
+mockRoute('PUT', '/admin/device/heartbeat/:id', ({ url }) => updateDeviceHeartbeatMock(extractId(url)))
+mockRoute('GET', '/admin/device/evidence/list', ({ params }) => getEvidenceListMock(params))
+mockRoute('POST', '/admin/device/evidence/add', ({ data }) => addEvidenceMock(data))
+mockRoute('GET', '/admin/device/hailer/list', ({ params }) => getHailerListMock(params?.deviceId))
+mockRoute('POST', '/admin/device/hailer/add', ({ data }) => addHailerMock(data))
+mockRoute('POST', '/admin/device/reset', () => {
+  resetDeviceMock(); resetOpticMock(); resetUavMock(); resetRadarMock()
+  return { success: true }
+})
+
+// 光电联动
+mockRoute('GET', '/admin/device/optic/list', () => getOpticDeviceListMock())
+mockRoute('GET', '/admin/device/optic/state/:id', ({ url }) => getOpticStateMock(extractId(url)))
+mockRoute('PUT', '/admin/device/optic/state/:id', ({ url, data }) => updateOpticStateMock(extractId(url), data))
+mockRoute('PUT', '/admin/device/optic/control/:id', ({ url, data }) => controlOpticMock(extractId(url), data?.action, data?.step))
+mockRoute('GET', '/admin/device/optic/preset/list', ({ params }) => getPresetListMock(params?.deviceId))
+mockRoute('POST', '/admin/device/optic/preset/add', ({ data }) => addPresetMock(data.deviceId, data.name))
+mockRoute('PUT', '/admin/device/optic/preset/update/:id', ({ url, data }) => updatePresetMock(extractId(url), data))
+mockRoute('DELETE', '/admin/device/optic/preset/delete/:id', ({ url }) => {
+  deletePresetMock(extractId(url))
+  return { success: true }
+})
+mockRoute('POST', '/admin/device/optic/preset/call', ({ data }) => callPresetMock(data.deviceId, data.presetId))
+mockRoute('GET', '/admin/device/optic/cruise/list', ({ params }) => getCruisePlanListMock(params?.deviceId))
+mockRoute('POST', '/admin/device/optic/cruise/save', ({ data }) => saveCruisePlanMock(data))
+mockRoute('DELETE', '/admin/device/optic/cruise/delete/:id', ({ url }) => {
+  deleteCruisePlanMock(extractId(url))
+  return { success: true }
+})
+mockRoute('POST', '/admin/device/optic/cruise/start', ({ data }) => startCruiseMock(data.deviceId, data.planId))
+mockRoute('POST', '/admin/device/optic/cruise/stop', ({ data }) => stopCruiseMock(data.deviceId))
+mockRoute('POST', '/admin/device/optic/cruise/tick', ({ data }) => tickCruiseMock(data.deviceId))
+
+// 无人机联动
+mockRoute('GET', '/admin/device/uav/list', () => getUavListMock())
+mockRoute('GET', '/admin/device/uav/state/:id', ({ url }) => getUavStateMock(extractId(url)))
+mockRoute('POST', '/admin/device/uav/control/:id', ({ url, data }) => controlUavMock(extractId(url), data?.action))
+mockRoute('GET', '/admin/device/uav/route/:id', ({ url }) => getUavRouteMock(extractId(url)))
+mockRoute('PUT', '/admin/device/uav/route/:id', ({ url, data }) => saveUavRouteMock(extractId(url), data))
+mockRoute('GET', '/admin/device/uav/template/list', () => getRouteTemplateListMock())
+mockRoute('POST', '/admin/device/uav/template/save', ({ data }) => saveRouteTemplateMock(data))
+mockRoute('GET', '/admin/device/uav/task/list', ({ params }) => getUavTaskListMock(params?.uavId))
+mockRoute('POST', '/admin/device/uav/task/create', ({ data }) => createUavTaskMock(data.uavId, data))
+mockRoute('PUT', '/admin/device/uav/task/update/:id', ({ url, data }) => updateUavTaskMock(extractId(url), data))
+mockRoute('POST', '/admin/device/uav/event', ({ data }) => addUavEventMock(data.uavId, data))
+
+// 雷达监测
+mockRoute('GET', '/admin/device/radar/station/list', () => getRadarStationListMock())
+mockRoute('GET', '/admin/device/radar/station/detail/:id', ({ url }) => getRadarStationDetailMock(extractId(url)))
+mockRoute('GET', '/admin/device/radar/target/list', ({ params }) => getRadarTargetListMock(params?.stationId))
+mockRoute('PUT', '/admin/device/radar/station/params/:id', ({ url, data }) => updateRadarStationParamsMock(extractId(url), data))

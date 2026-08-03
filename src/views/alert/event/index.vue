@@ -58,8 +58,9 @@
             <ElTableColumn label="是否误报" width="85" align="center">
               <template #default="{ row }">{{ row.isFalseAlarm ? '是' : '否' }}</template>
             </ElTableColumn>
-            <ElTableColumn label="快速操作" width="200" align="center" fixed="right" class-name="annot-alert-event-reception-actions">
+            <ElTableColumn label="快速操作" width="280" align="center" fixed="right" class-name="annot-alert-event-reception-actions">
               <template #default="{ row }">
+                <ElButton link type="primary" :icon="VideoCamera" @click.stop="openLinkage(row)">联动视频</ElButton>
                 <template v-if="row.status === 'pending'">
                   <ElButton link type="primary" @click.stop="quickClaim(row)">签收</ElButton>
                   <ElButton link type="primary" @click.stop="quickAssign(row)">派发</ElButton>
@@ -139,8 +140,9 @@
               <template #default="{ row }">{{ row.assigneeName || '-' }}</template>
             </ElTableColumn>
             <ElTableColumn prop="triggerTime" label="触发时间" width="170" />
-            <ElTableColumn label="操作" width="280" align="center" fixed="right" class-name="annot-alert-event-disposal-actions">
+            <ElTableColumn label="操作" width="360" align="center" fixed="right" class-name="annot-alert-event-disposal-actions">
               <template #default="{ row }">
+                <ElButton link type="primary" :icon="VideoCamera" @click.stop="openLinkage(row)">联动视频</ElButton>
                 <template v-if="row.status === 'pending'">
                   <ElButton link type="primary" @click.stop="disposalClaim(row)">签收</ElButton>
                   <ElButton link type="primary" @click.stop="disposalAssign(row)">派发</ElButton>
@@ -369,14 +371,19 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { Search, Setting } from '@element-plus/icons-vue'
+import { Search, Setting, VideoCamera } from '@element-plus/icons-vue'
+import { useDeviceStore } from '@/store/modules/device'
 import {
   getAlertEventList, getAlertEventStats, updateAlertEvent, addEventTimeline,
   getFalseAlarmStats, getRuleVersions, rollbackVersion
 } from '@/api/alert'
 
 defineOptions({ name: 'AlertEvent' })
+
+const router = useRouter()
+const deviceStore = useDeviceStore()
 
 const activeTab = ref('reception')
 
@@ -403,6 +410,23 @@ async function loadEvents() {
 }
 
 function resetReceptionFilter() { filterR.keyword = ''; filterR.alertLevel = ''; filterR.status = ''; eventPage.page = 1; loadEvents() }
+
+/** 跳转光电联动并写入事件上下文 */
+function openLinkage(row: any) {
+  deviceStore.setLinkContext({
+    eventId: row.id,
+    targetId: row.targetId,
+    deviceId: 101,
+    sourceRoute: '/alert/event',
+    eventName: `告警事件 #${row.id}`,
+    targetName: row.targetName,
+    targetMmsi: row.targetMmsi,
+    ruleName: row.ruleName,
+    alertLevel: row.alertLevel,
+    status: row.status
+  })
+  router.push({ path: '/device/optics', query: { deviceId: '101', eventId: String(row.id), targetId: row.targetId } })
+}
 
 // Tab2: 报警处置流程
 const filterD = reactive({ keyword: '', status: '' })

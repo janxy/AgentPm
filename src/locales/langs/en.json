@@ -233,6 +233,13 @@
       "title": "Permission",
       "role": "Role Management",
       "menu": "Menu Management"
+    },
+    "device": {
+      "title": "Device Linkage",
+      "overview": "Device Overview",
+      "optics": "Optic Linkage",
+      "uav": "UAV Linkage",
+      "radar": "Radar Monitoring"
     }
   },
   "table": {
