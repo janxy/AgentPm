@@ -1,7 +1,7 @@
 <template>
   <div class="optic-page">
     <!-- 预警事件联动上下文条 -->
-    <div v-if="linkContext?.eventId" class="context-bar">
+    <div v-if="linkContext?.eventId" class="context-bar annot-device-optics-context">
       <div class="context-info">
         <strong>联动事件 #{{ linkContext.eventId }}</strong>
         <span>{{ linkContext.targetName || '-' }} / {{ linkContext.targetMmsi || '-' }}</span>
@@ -18,9 +18,9 @@
 
     <div class="main-row">
       <!-- 左侧设备列表 -->
-      <ElCard shadow="never" class="device-list-card">
+      <ElCard shadow="never" class="device-list-card annot-device-optics-list">
         <div class="list-header">光电设备</div>
-        <div class="list-tools">
+        <div class="list-tools annot-device-optics-filter">
           <ElRadioGroup v-model="statusFilter" size="small">
             <ElRadioButton value="all">全部</ElRadioButton>
             <ElRadioButton value="online">在线</ElRadioButton>
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <ElButton class="evidence-fab" type="primary" :icon="FolderOpened" @click="evidenceVisible = true">取证与喊话记录</ElButton>
+    <ElButton class="evidence-fab annot-device-optics-evidence-btn" type="primary" :icon="FolderOpened" @click="evidenceVisible = true">取证与喊话记录</ElButton>
     <OpticEvidenceDrawer v-model:visible="evidenceVisible" :device="selectedDevice" :event-context="linkContext" />
   </div>
 </template>

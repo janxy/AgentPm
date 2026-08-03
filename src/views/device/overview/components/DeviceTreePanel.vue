@@ -1,6 +1,6 @@
 <template>
   <div class="device-tree-panel">
-    <div class="tree-tools">
+    <div class="tree-tools annot-device-overview-tree-tools">
       <ElRadioGroup v-model="groupMode" size="small">
         <ElRadioButton value="type">按类型</ElRadioButton>
         <ElRadioButton value="region">按区域</ElRadioButton>
@@ -15,7 +15,7 @@
       :current-node-key="selectedKey"
       default-expand-all
       ref="treeRef"
-      class="device-tree"
+      class="device-tree annot-device-overview-tree"
       @node-click="handleNodeClick"
     >
       <template #default="{ data }">

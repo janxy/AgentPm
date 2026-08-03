@@ -1,5 +1,5 @@
 <template>
-  <div ref="wrapRef" class="ppi-wrap">
+  <div ref="wrapRef" class="ppi-wrap annot-device-radar-ppi">
     <canvas ref="canvasRef" class="ppi-canvas" @click="onCanvasClick"></canvas>
     <div v-if="!active" class="offline-mask">
       <div class="offline-title">设备离线</div>

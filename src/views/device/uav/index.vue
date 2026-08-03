@@ -22,7 +22,7 @@
     <!-- 下区：任务控制与记录 -->
     <ElCard shadow="never" class="task-card">
       <div class="task-columns">
-        <div class="task-col control-col">
+        <div class="task-col control-col annot-device-uav-control">
           <div class="col-title">飞行控制</div>
           <div class="control-uav">
             <span class="uav-name">{{ selectedUav?.name || '未选择无人机' }}</span>
@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <div class="task-col progress-col">
+        <div class="task-col progress-col annot-device-uav-progress">
           <div class="col-title">任务执行</div>
           <template v-if="activeTask">
             <div class="progress-head">
@@ -60,7 +60,7 @@
           <ElEmpty v-else description="暂无执行中任务" :image-size="52" />
         </div>
 
-        <div class="task-col record-col">
+        <div class="task-col record-col annot-device-uav-record">
           <div class="record-tabs">
             <span class="col-title">任务与异常</span>
             <ElRadioGroup v-model="recordTab" size="small">
@@ -94,7 +94,7 @@
     </ElCard>
 
     <!-- 任务详情抽屉 -->
-    <ElDrawer v-model="taskDetailVisible" title="任务详情" direction="rtl" size="480px">
+    <ElDrawer v-model="taskDetailVisible" title="任务详情" direction="rtl" size="480px" class="annot-device-uav-task-detail">
       <template v-if="taskDetail">
         <ElDescriptions :column="2" border size="small">
           <ElDescriptionsItem label="任务编号">{{ taskDetail.id }}</ElDescriptionsItem>

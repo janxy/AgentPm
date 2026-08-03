@@ -1,7 +1,7 @@
 <template>
   <div class="radar-page">
     <!-- 雷达站信息与参数 -->
-    <ElCard shadow="never" class="station-card">
+    <ElCard shadow="never" class="station-card annot-device-radar-station">
       <div class="station-row">
         <div class="station-block">
           <span class="block-label">雷达站</span>
@@ -28,7 +28,7 @@
             <strong :class="{ 'temp-warn': (stationDetail?.temperature || 0) > 40 }">{{ stationDetail?.temperature ?? 0 }}℃</strong>
           </div>
         </div>
-        <div v-if="stationDetail" class="param-block">
+        <div v-if="stationDetail" class="param-block annot-device-radar-param">
           <div class="param-item">
             <span class="block-label">量程</span>
             <ElRadioGroup v-model="stationDetail.range" size="small" :disabled="!stationOnline" @change="updateParams">
@@ -72,7 +72,7 @@
       </ElCard>
 
       <ElCard shadow="never" class="target-card">
-        <div class="target-head">
+        <div class="target-head annot-device-radar-target-toolbar">
           <span class="target-title">目标列表</span>
           <ElSelect v-model="sortKey" size="small" class="sort-select" @change="toggleSort">
             <ElOption label="按距离" value="distance" />
@@ -82,7 +82,7 @@
           </ElSelect>
           <ElButton :icon="sortDir === 'asc' ? Top : Bottom" size="small" @click="toggleSort">{{ sortDir === 'asc' ? '升序' : '降序' }}</ElButton>
         </div>
-        <div class="range-filter">
+        <div class="range-filter annot-device-radar-range-filter">
           <span>范围筛选 ≤ {{ maxDistance }}km</span>
           <ElSlider v-model="maxDistance" :min="3" :max="stationDetail?.range || 24" :disabled="!stationOnline" size="small" class="filter-slider" />
         </div>
@@ -90,7 +90,7 @@
           v-loading="targetLoading"
           :data="visibleTargets"
           size="small"
-          class="target-table"
+          class="target-table annot-device-radar-target-table"
           empty-text="无目标数据"
           :row-class-name="rowClassName"
           @row-click="onTargetRowClick"

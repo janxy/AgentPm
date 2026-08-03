@@ -1,0 +1,96 @@
+{
+  "page": "device-uav",
+  "title": "无人机联动",
+  "updatedAt": "2026-08-03",
+  "annotations": [
+    {
+      "id": "ann-device-uav-status",
+      "type": "selector",
+      "selector": ".annot-device-uav-status",
+      "position": { "x": 0, "y": 0 },
+      "title": "无人机状态监控",
+      "content": "在线无人机状态卡片，实时展示：\n- 位置、高度、速度\n- 姿态：横滚/俯仰角\n- 距原点距离\n- 剩余电量与预估续航\n\n电量低于 20% 时卡片标红并触发\"低电量返航提示\"；信号丢失时显示\"信号丢失，已模拟自动返航\"；返航中显示\"返航中\"状态。",
+      "category": "display",
+      "source": "设计方案 3.3 无人机联动 - 左侧无人机状态卡片",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-map",
+      "type": "selector",
+      "selector": ".annot-device-uav-map",
+      "position": { "x": 0, "y": 0 },
+      "title": "航线规划地图",
+      "content": "Leaflet 地图用于航线规划：\n- 点击地图任意位置新增航点\n- 拖动起降点/航点标记调整位置\n- 绿色起、红色降、蓝色航点，地图实时连线\n- 顶部提示\"点击地图添加航点，拖动标记调整位置\"",
+      "category": "action",
+      "source": "设计方案 3.3 无人机联动 - 右侧地图与航线规划",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-route-summary",
+      "type": "selector",
+      "selector": ".annot-device-uav-route-summary",
+      "position": { "x": 0, "y": 0 },
+      "title": "航程与续航校验",
+      "content": "实时计算并展示：\n- 总航程\n- 预估续航距离\n\n航程超过预估续航时显示\"超出续航\"红色警告并阻止任务下发；续航充足时显示绿色\"续航充足\"。",
+      "category": "rule",
+      "source": "设计方案 3.3 无人机联动 - 航线校验",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-waypoint",
+      "type": "selector",
+      "selector": ".annot-device-uav-waypoint",
+      "position": { "x": 0, "y": 0 },
+      "title": "航点管理与航线模板",
+      "content": "航点管理：\n- 编辑航点经纬度、分段高度（10-500m）与速度（1-30m/s）\n- 上移/下移调整执行顺序、删除航点\n\n航线操作：\n- 保存航线\n- 存为航线模板\n- 选择模板一键复用\n\n航点少于 2 个时不可保存或下发任务。",
+      "category": "action",
+      "source": "设计方案 3.3 无人机联动 - 航线模板/航点管理",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-control",
+      "type": "selector",
+      "selector": ".annot-device-uav-control",
+      "position": { "x": 0, "y": 0 },
+      "title": "飞行控制与任务下发",
+      "content": "基础飞行控制：\n- 起飞\n- 悬停\n- 返航\n\n任务下发：\n- 按当前规划航线下发任务\n- 任务执行中禁止重复下发，提示\"任务执行中\"\n- 航点少于 2 个或航线超出续航时阻止下发并给出原因",
+      "category": "action",
+      "source": "设计方案 3.3 无人机联动 - 底部任务控制条",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-progress",
+      "type": "selector",
+      "selector": ".annot-device-uav-progress",
+      "position": { "x": 0, "y": 0 },
+      "title": "任务执行进度",
+      "content": "任务下发后实时展示执行情况：\n- 当前航点 / 总航点数\n- 已飞航程\n- 剩余航程\n- 预计剩余时间（min）\n\n进度条实时更新，执行中可点击\"终止\"结束任务并写入异常记录。",
+      "category": "display",
+      "source": "设计方案 3.3 无人机联动 - 任务执行进度条",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-record",
+      "type": "selector",
+      "selector": ".annot-device-uav-record",
+      "position": { "x": 0, "y": 0 },
+      "title": "任务与异常记录",
+      "content": "双 Tab 展示留痕记录：\n- 任务：任务编号、状态（执行中/已完成）、进度、详情入口\n- 异常：时间、类型、内容（低电量、信号丢失、任务中断等自动记录）\n\n任务详情可查看起止时间、途经航点与异常事件时间线。",
+      "category": "table",
+      "source": "设计方案 3.3 无人机联动 - 任务记录/异常事件记录",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-uav-task-detail",
+      "type": "selector",
+      "selector": ".annot-device-uav-task-detail",
+      "position": { "x": 0, "y": 0 },
+      "title": "任务详情抽屉",
+      "content": "查看单次任务的完整执行信息：\n- 任务编号、关联无人机\n- 开始/结束时间\n- 飞行距离、执行进度\n- 途经航点坐标、高度与速度\n- 异常事件时间线\n\n所有字段只读展示，用于事后复盘与审计。",
+      "category": "display",
+      "source": "设计方案 3.3 无人机联动 - 任务记录",
+      "container": "drawer",
+      "createdAt": "2026-08-03"
+    }
+  ]
+}

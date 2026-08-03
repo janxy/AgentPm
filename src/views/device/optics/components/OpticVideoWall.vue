@@ -1,6 +1,6 @@
 <template>
   <div class="video-wall">
-    <div class="wall-toolbar">
+    <div class="wall-toolbar annot-device-optics-video-toolbar">
       <div class="toolbar-left">
         <ElRadioGroup v-model="gridSize" size="small" :disabled="!device">
           <ElRadioButton :value="1">单屏</ElRadioButton>
@@ -23,7 +23,7 @@
         </ElButton>
       </div>
     </div>
-    <div ref="canvasWrap" class="canvas-wrap">
+    <div ref="canvasWrap" class="canvas-wrap annot-device-optics-video">
       <canvas ref="canvasRef" class="video-canvas"></canvas>
       <div v-if="!device" class="cover-mask">请从左侧选择光电设备</div>
       <div v-else-if="device.status === 0" class="cover-mask offline-mask">设备离线，画面已冻结</div>

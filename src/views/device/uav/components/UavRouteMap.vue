@@ -1,9 +1,9 @@
 <template>
   <div class="route-map-panel">
-    <div class="map-area">
+    <div class="map-area annot-device-uav-map">
       <div ref="mapContainer" class="map-container"></div>
       <div class="map-hint">点击地图添加航点，拖动标记调整位置</div>
-      <div class="route-summary">
+      <div class="route-summary annot-device-uav-route-summary">
         <span>总航程 <strong :class="{ danger: metrics.exceed }">{{ metrics.totalDistance.toFixed(1) }}km</strong></span>
         <span>预估续航距离 <strong>{{ metrics.enduranceDistance.toFixed(1) }}km</strong></span>
         <ElTag v-if="metrics.exceed" type="danger" size="small">超出续航</ElTag>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="waypoint-area">
+    <div class="waypoint-area annot-device-uav-waypoint">
       <div class="waypoint-head">
         <span class="waypoint-title">航线航点</span>
         <ElButton size="small" type="primary" :disabled="!canEdit" @click="saveRoute">保存航线</ElButton>

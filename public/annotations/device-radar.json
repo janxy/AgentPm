@@ -1,0 +1,73 @@
+{
+  "page": "device-radar",
+  "title": "雷达监测",
+  "updatedAt": "2026-08-03",
+  "annotations": [
+    {
+      "id": "ann-device-radar-station",
+      "type": "selector",
+      "selector": ".annot-device-radar-station",
+      "position": { "x": 0, "y": 0 },
+      "title": "雷达站选择与运行参数",
+      "content": "顶部雷达站信息栏：\n- 选择雷达站，展示在线/离线/故障状态与设备编码\n- 信号强度：百分比进度条\n- 天线转速：r/min\n- 设备温度：超过 40℃ 黄色警告\n\n雷达站离线时 PPI 回波冻结并显示离线遮罩，目标列表清空。",
+      "category": "display",
+      "source": "设计方案 3.4 雷达监测 - 顶部雷达站信息栏",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-radar-param",
+      "type": "selector",
+      "selector": ".annot-device-radar-param",
+      "position": { "x": 0, "y": 0 },
+      "title": "量程增益与色标调节",
+      "content": "雷达回波显示参数控制：\n- 量程：12/24/36/48km\n- 增益：20-100 滑块调节\n- 色标方案：标准/冷色/热色\n- 显示模式：R 式 / A-R 式\n\n参数调整后回波实时刷新，色标切换不改变目标数据；雷达离线时参数禁用。",
+      "category": "action",
+      "source": "设计方案 3.4 雷达监测 - 参数控制",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-radar-ppi",
+      "type": "selector",
+      "selector": ".annot-device-radar-ppi",
+      "position": { "x": 0, "y": 0 },
+      "title": "PPI 回波展示",
+      "content": "Canvas 绘制平面位置显示器：\n- 距离环与距离刻度\n- 方位刻度（N/E/S/W）\n- 扫描波束按天线转速旋转\n- 回波点按目标强度分级着色，弱回波自动增益补偿\n- 目标选中后回波点高亮闪烁并显示编号\n\n点击回波区可反向选中附近目标；无目标时仅保留扫描线、距离环与方位刻度。",
+      "category": "display",
+      "source": "设计方案 3.4 雷达监测 - 左侧 PPI 回波区",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-radar-target-toolbar",
+      "type": "selector",
+      "selector": ".annot-device-radar-target-toolbar",
+      "position": { "x": 0, "y": 0 },
+      "title": "目标列表排序",
+      "content": "目标列表排序控制：\n- 按距离/方位/速度/强度排序\n- 升序/降序切换\n\n点击后目标列表立即重排，辅助按关注维度筛选目标。",
+      "category": "filter",
+      "source": "设计方案 3.4 雷达监测 - 目标列表",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-radar-range-filter",
+      "type": "selector",
+      "selector": ".annot-device-radar-range-filter",
+      "position": { "x": 0, "y": 0 },
+      "title": "距离范围筛选",
+      "content": "拖动滑块按距离筛选目标，范围 3km 至当前雷达量程（如 24km），筛选结果实时反映在目标列表与 PPI 回波区。",
+      "category": "filter",
+      "source": "设计方案 3.4 雷达监测 - 距离范围筛选",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-radar-target-table",
+      "type": "selector",
+      "selector": ".annot-device-radar-target-table",
+      "position": { "x": 0, "y": 0 },
+      "title": "目标列表",
+      "content": "目标列表字段：\n- 目标编号\n- 距离（km）\n- 方位（°）\n- 速度（kn）\n- 目标等级：高关注（红）/一般（橙）/微弱（绿）\n- 强度进度条\n\n点击列表行在 PPI 区高亮对应回波点，再次点击取消高亮，实现目标列表与回波双向联动。",
+      "category": "table",
+      "source": "设计方案 3.4 雷达监测 - 右侧目标列表",
+      "createdAt": "2026-08-03"
+    }
+  ]
+}

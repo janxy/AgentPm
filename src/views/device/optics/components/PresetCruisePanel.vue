@@ -1,5 +1,5 @@
 <template>
-  <ElCard shadow="never" class="preset-card">
+  <ElCard shadow="never" class="preset-card annot-device-optics-preset">
     <template #header><span class="card-title">预置位与巡航</span></template>
 
     <div class="preset-add">

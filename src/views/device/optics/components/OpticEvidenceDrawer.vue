@@ -10,7 +10,7 @@
       联动事件：{{ eventContext.eventId }} / {{ eventContext.targetId || '未关联目标' }}
     </div>
 
-    <ElCard shadow="never" class="hailer-card">
+    <ElCard shadow="never" class="hailer-card annot-device-optics-hailer">
       <template #header><span class="card-title">喊话广播</span></template>
       <div class="hailer-presets">
         <ElButton v-for="text in presetTexts" :key="text" size="small" :disabled="!canOperate" @click="sendHailer(text, 'tts')">
@@ -23,7 +23,7 @@
       </div>
     </ElCard>
 
-    <ElCard shadow="never" class="evidence-card">
+    <ElCard shadow="never" class="evidence-card annot-device-optics-evidence-list">
       <template #header><span class="card-title">取证记录</span></template>
       <ElTable :data="evidenceList" size="small" v-loading="loading" empty-text="暂无取证记录">
         <ElTableColumn label="类型" width="80" align="center">
@@ -46,7 +46,7 @@
       </ElTable>
     </ElCard>
 
-    <ElCard shadow="never" class="hailer-record-card">
+    <ElCard shadow="never" class="hailer-record-card annot-device-optics-hailer-record">
       <template #header><span class="card-title">喊话记录</span></template>
       <ElTimeline v-if="hailerList.length">
         <ElTimelineItem v-for="h in hailerList" :key="h.id" :timestamp="h.createTime" placement="top" type="warning">

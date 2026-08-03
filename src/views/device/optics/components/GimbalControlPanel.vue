@@ -1,5 +1,5 @@
 <template>
-  <ElCard shadow="never" class="gimbal-card">
+  <ElCard shadow="never" class="gimbal-card annot-device-optics-gimbal">
     <template #header><span class="card-title">云台控制</span></template>
     <div class="angle-grid">
       <div class="angle-item">

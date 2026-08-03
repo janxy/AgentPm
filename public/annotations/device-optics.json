@@ -1,0 +1,165 @@
+{
+  "page": "device-optics",
+  "title": "光电联动",
+  "updatedAt": "2026-08-03",
+  "annotations": [
+    {
+      "id": "ann-device-optics-context",
+      "type": "selector",
+      "selector": ".annot-device-optics-context",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "预警事件联动上下文",
+      "content": "从预警事件\"联动视频\"进入时展示事件上下文：\n- 事件编号\n- 目标名称/MMSI\n- 触发规则\n- 告警级别：紧急/重要/一般/提示\n- 处置状态\n\n点击\"返回事件\"回到来源事件页；无事件上下文时该条隐藏，不影响独立使用。",
+      "category": "display",
+      "source": "设计方案 3.2 光电联动 - 事件上下文条",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-list",
+      "type": "selector",
+      "selector": ".annot-device-optics-list",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "光电设备列表",
+      "content": "展示在线/离线光电设备：\n- 设备名称\n- 型号与状态\n- 当前方位角与倍率\n\n点击选中设备后，视频墙、云台、预置位面板联动切换；离线设备列表置灰，选中后视频窗显示\"设备离线\"。",
+      "category": "table",
+      "source": "设计方案 3.2 光电联动 - 左侧设备列表",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-filter",
+      "type": "selector",
+      "selector": ".annot-device-optics-filter",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "设备状态筛选",
+      "content": "按设备在线状态筛选列表：\n- 全部\n- 在线\n- 离线\n\n筛选后点击设备即可联动切换视频与控制面板。",
+      "category": "filter",
+      "source": "SRS 3.3 页面功能清单 - 光电联动 筛选设备",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-video-toolbar",
+      "type": "selector",
+      "selector": ".annot-device-optics-video-toolbar",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "视频墙工具栏",
+      "content": "<p>视频墙控制区：</p><ul><li><p>分屏布局：单屏/四分屏/九分屏/十六分屏<mark data-color=\"#ff00ea\" style=\"background-color: rgb(255, 0, 234); color: inherit;\">（</mark><mark data-color=\"#f5ccf1\" style=\"background-color: rgb(245, 204, 241); color: inherit;\">这块先不做吧</mark><mark data-color=\"#ff00ea\" style=\"background-color: rgb(255, 0, 234); color: inherit;\">）</mark></p></li><li><p>显示模式：可见光/红外/画中画/融合（双光设备可用）</p></li><li><p>弱网模拟：切换子码流验证画面降级提示</p></li><li><p>截图：抓取当前画面生成带时间水印取证图片</p></li><li><p>录像：开始/停止录像并生成录像片段</p></li></ul><p>设备离线时截图录像按钮禁用。</p>",
+      "category": "action",
+      "source": "设计方案 3.2 光电联动 - 中间视频墙/取证操作栏",
+      "createdAt": "2026-08-03",
+      "color": ""
+    },
+    {
+      "id": "ann-device-optics-video",
+      "type": "selector",
+      "selector": ".annot-device-optics-video",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "实时视频墙",
+      "content": "Canvas 模拟实时视频画面，叠加海浪、船只动态元素与轻微噪声，画面展示设备名称、倍率和 UTC 时间水印。\n\n弱网模拟开启时自动切换子码流并显示\"弱网中，已切换子码流\"提示；设备离线时画面冻结并叠加离线遮罩；录制中显示 REC 标识。",
+      "category": "display",
+      "source": "设计方案 3.2 光电联动 - 中间视频墙",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-gimbal",
+      "type": "selector",
+      "selector": ".annot-device-optics-gimbal",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "云台控制面板",
+      "content": "云台角度与镜头控制：\n- 方位角 0-360° 连续旋转，俯仰角精确到 0.1°\n- 八方向转动控制，按住连续转动、松开停止\n- 步长可选：0.1°/0.5°/1°/5°\n- 变倍 +/ -、聚焦近/远\n\n方位角或俯仰角超出软限位时停止转动并提示\"已达到软限位\"。",
+      "category": "action",
+      "source": "设计方案 3.2 光电联动 - 右侧云台控制面板",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-preset",
+      "type": "selector",
+      "selector": ".annot-device-optics-preset",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "预置位与巡航管理",
+      "content": "预置位管理：\n- 记录当前位置为新预置位\n- 调用、重命名、删除预置位\n- 同一设备内预置位名称唯一，重名拦截\n\n巡航管理：\n- 按顺序选择预置位、设置停留时长并保存计划\n- 至少 2 个预置位才能启动巡航\n- 巡航启动后按序调用预置位，支持停止",
+      "category": "action",
+      "source": "设计方案 3.2 光电联动 - 预置位/巡航",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-evidence-btn",
+      "type": "selector",
+      "selector": ".annot-device-optics-evidence-btn",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "取证与喊话记录入口",
+      "content": "打开\"取证与喊话记录\"抽屉，集中查看：\n- 预设文案/实时喊话广播\n- 截图与录像取证记录\n- 喊话记录时间线\n\n联动场景下新增记录自动关联预警事件编号。",
+      "category": "action",
+      "source": "设计方案 3.2 光电联动 - 取证操作栏",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-hailer",
+      "type": "selector",
+      "selector": ".annot-device-optics-hailer",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "喊话广播",
+      "content": "喊话广播支持两种方式：\n- 预设文案：驱离警告/警示/引导一键广播（TTS）\n- 实时喊话：输入内容模拟广播\n\n喊话内容与时间自动写入喊话记录，全程留痕；设备离线时禁用。",
+      "category": "action",
+      "source": "设计方案 3.2 光电联动 - 喊话",
+      "container": "drawer",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-evidence-list",
+      "type": "selector",
+      "selector": ".annot-device-optics-evidence-list",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "取证记录",
+      "content": "展示截图与录像取证记录：\n- 类型：截图/录像标签\n- 内容摘要\n- 操作人、操作时间\n- 下载取证文件\n\n联动场景下记录自动关联事件编号，供事件详情查询与事后审计。",
+      "category": "table",
+      "source": "设计方案 3.2 光电联动 - 取证记录面板",
+      "container": "drawer",
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": "ann-device-optics-hailer-record",
+      "type": "selector",
+      "selector": ".annot-device-optics-hailer-record",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "title": "喊话记录",
+      "content": "按时间线展示喊话留痕：\n- 喊话类型：TTS 预设 / 实时喊话\n- 喊话内容\n- 操作时间\n\n与截图、录像记录共同构成光电联动操作的统一审计记录。",
+      "category": "table",
+      "source": "设计方案 3.2 光电联动 - 取证与喊话留痕",
+      "container": "drawer",
+      "createdAt": "2026-08-03"
+    }
+  ]
+}

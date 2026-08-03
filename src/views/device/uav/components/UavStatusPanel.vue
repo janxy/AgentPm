@@ -1,5 +1,5 @@
 <template>
-  <div class="uav-status-panel">
+  <div class="uav-status-panel annot-device-uav-status">
     <div class="panel-title">无人机状态</div>
     <div
       v-for="uav in uavs"

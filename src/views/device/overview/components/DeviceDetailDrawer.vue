@@ -6,7 +6,7 @@
     size="500px"
     @update:model-value="emit('update:visible', $event)"
   >
-    <div v-loading="loading" class="detail-body">
+    <div v-loading="loading" class="detail-body annot-device-overview-detail">
       <template v-if="detail">
         <div class="detail-head">
           <div class="detail-name">{{ detail.name }}</div>

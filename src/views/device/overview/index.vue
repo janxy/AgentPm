@@ -2,7 +2,7 @@
   <div class="device-overview-page">
     <!-- 顶部状态统计 -->
     <ElCard shadow="never" class="stats-card">
-      <div class="stats-grid">
+      <div class="stats-grid annot-device-overview-stats">
         <div class="stat-item">
           <div class="stat-value">{{ deviceStore.stats.total }}</div>
           <div class="stat-label">设备总数</div>
@@ -35,8 +35,8 @@
       </ElCard>
       <!-- 右侧地图 -->
       <ElCard shadow="never" class="map-card">
-        <div ref="mapContainer" class="map-container"></div>
-        <div class="map-legend">
+        <div ref="mapContainer" class="map-container annot-device-overview-map"></div>
+        <div class="map-legend annot-device-overview-legend">
           <span class="legend-item"><i class="legend-dot dot-online"></i>在线</span>
           <span class="legend-item"><i class="legend-dot dot-offline"></i>离线</span>
           <span class="legend-item"><i class="legend-dot dot-fault"></i>故障</span>
