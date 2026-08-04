@@ -181,6 +181,30 @@
       margin-left: auto;
       overflow: hidden;
 
+      .cockpit-btn {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        gap: 6px;
+        height: 36px;
+        padding: 0 12px;
+        margin: 0 12px 0 0;
+        color: #fff;
+        font-size: 13px;
+        background-color: var(--main-color, var(--el-color-primary));
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          opacity: 0.85;
+        }
+
+        i {
+          font-size: 15px;
+        }
+      }
+
       .search-wrap {
         position: relative;
         display: flex;

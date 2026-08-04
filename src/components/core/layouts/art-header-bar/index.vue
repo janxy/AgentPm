@@ -44,6 +44,12 @@
       <div class="right">
         <!-- 框架一模式：显示工具栏 -->
         <template v-if="!isFrameworkTwo">
+          <!-- 驾驶舱 -->
+          <div class="cockpit-btn" @click="openCockpit">
+            <i class="iconfont-sys">&#xe81d;</i>
+            <span>驾驶舱</span>
+          </div>
+
           <!-- 搜索 -->
           <div class="search-wrap" v-if="shouldShowGlobalSearch">
             <div class="search-input" @click="openSearchDialog">
@@ -288,6 +294,13 @@
    */
   const toGithub = (): void => {
     window.open(WEB_LINKS.GITHUB)
+  }
+
+  /**
+   * 打开驾驶舱页面
+   */
+  const openCockpit = (): void => {
+    window.open(WEB_LINKS.COCKPIT, '_blank')
   }
 
   /**

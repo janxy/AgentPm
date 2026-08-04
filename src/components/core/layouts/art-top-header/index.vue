@@ -22,6 +22,12 @@
 
       <!-- 右侧：工具栏 (从 ArtHeaderBar 复制) -->
       <div class="header-right">
+        <!-- 驾驶舱 -->
+        <div class="cockpit-btn" @click="openCockpit">
+          <i class="iconfont-sys">&#xe81d;</i>
+          <span>驾驶舱</span>
+        </div>
+
         <!-- 搜索 -->
         <div class="search-wrap" v-if="shouldShowGlobalSearch">
           <div class="search-input" @click="openSearchDialog">
@@ -263,6 +269,11 @@
     window.open(WEB_LINKS.GITHUB)
   }
 
+  // 驾驶舱
+  const openCockpit = (): void => {
+    window.open(WEB_LINKS.COCKPIT, '_blank')
+  }
+
   // 跳转首页
   const toHome = (): void => {
     router.push('/')
@@ -428,6 +439,28 @@
       align-items: center;
       gap: 8px;
       flex-shrink: 0;
+
+      .cockpit-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 36px;
+        padding: 0 12px;
+        color: #ffffff;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.25);
+        }
+
+        i {
+          font-size: 15px;
+        }
+      }
 
       .search-wrap {
         margin-right: 8px;
