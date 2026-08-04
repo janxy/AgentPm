@@ -6,11 +6,11 @@
         <strong>联动事件 #{{ linkContext.eventId }}</strong>
         <span>{{ linkContext.targetName || '-' }} / {{ linkContext.targetMmsi || '-' }}</span>
         <span>{{ linkContext.ruleName || '触发规则未提供' }}</span>
-        <ElTag :type="alertLevelTag[linkContext.alertLevel] || 'info'" size="small" disable-transitions>
-          {{ alertLevelLabel[linkContext.alertLevel] || '未知级别' }}
+        <ElTag :type="alertLevelTag[linkContext.alertLevel || ''] || 'info'" size="small" disable-transitions>
+          {{ alertLevelLabel[linkContext.alertLevel || ''] || '未知级别' }}
         </ElTag>
-        <ElTag :type="statusTag[linkContext.status] || 'info'" size="small" disable-transitions>
-          {{ statusLabel[linkContext.status] || '未知状态' }}
+        <ElTag :type="statusTag[linkContext.status || ''] || 'info'" size="small" disable-transitions>
+          {{ statusLabel[Number(linkContext.status || -1)] || '未知状态' }}
         </ElTag>
       </div>
       <ElButton size="small" :icon="Back" @click="backToEvent">返回事件</ElButton>
@@ -118,7 +118,7 @@ let cruiseTimer: ReturnType<typeof setInterval> | null = null
 const alertLevelLabel: Record<string, string> = { urgent: '紧急', important: '重要', normal: '一般', tip: '提示' }
 const alertLevelTag: Record<string, 'danger' | 'warning' | 'primary' | 'info'> = { urgent: 'danger', important: 'warning', normal: 'primary', tip: 'info' }
 const statusLabel: Record<number, string> = { 1: '在线', 0: '离线', 2: '故障' }
-const statusTag: Record<string, 'success' | 'info' | 'warning'> = { pending: 'danger', disposing: 'warning', closed: 'success', archived: 'info' }
+const statusTag: Record<string, 'success' | 'info' | 'warning' | 'danger'> = { pending: 'danger', disposing: 'warning', closed: 'success', archived: 'info' }
 const linkContext = computed(() => deviceStore.linkContext)
 const filteredDevices = computed(() => opticDevices.value.filter((d) => statusFilter.value === 'all' || (statusFilter.value === 'online' ? d.status === 1 : d.status !== 1)))
 

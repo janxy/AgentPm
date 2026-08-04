@@ -124,7 +124,7 @@ function renderMarkers() {
     box.append(title, info, actions)
     marker.bindPopup(box)
     marker.on('click', () => handleSelect(device))
-    marker.addTo(markerLayer)
+    marker.addTo(markerLayer!)
   })
 }
 
