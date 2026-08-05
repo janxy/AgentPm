@@ -45,6 +45,12 @@ export const deviceRoutes: AppRouteRecord = {
       meta: { title: '无人机联动（已弃用）', keepAlive: true, deprecated: true }
     },
     {
+      path: 'uav-linkage',
+      name: 'DeviceUavLinkage',
+      component: () => import('@/views/device/uav-linkage/index.vue'),
+      meta: { title: '无人机联动', keepAlive: true }
+    },
+    {
       path: 'radar',
       name: 'DeviceRadar',
       component: () => import('@/views/device/radar/index.vue'),

@@ -10,10 +10,20 @@
           {{ alertLevelLabel[linkContext.alertLevel || ''] || '未知级别' }}
         </ElTag>
         <ElTag :type="statusTag[linkContext.status || ''] || 'info'" size="small" disable-transitions>
-          {{ statusLabel[Number(linkContext.status || -1)] || '未知状态' }}
+          {{ eventStatusLabel[linkContext.status || ''] || '未知状态' }}
+        </ElTag>
+        <span v-if="linkContext.location" class="context-coord">
+          告警坐标 {{ linkContext.location?.lat?.toFixed(4) }}, {{ linkContext.location?.lng?.toFixed(4) }} {{ linkContext.location?.address || '' }}
+        </span>
+        <span v-if="linkContext.triggerTime" class="context-time">{{ linkContext.triggerTime }}</span>
+        <ElTag v-if="targetDistance !== null" :type="targetDistance > 10 || selectedDevice?.status !== 1 ? 'warning' : 'success'" size="small" disable-transitions>
+          光电距告警点 {{ targetDistanceText }}
         </ElTag>
       </div>
-      <ElButton size="small" :icon="Back" @click="backToEvent">返回事件</ElButton>
+      <div class="context-actions">
+        <ElButton size="small" type="primary" :icon="Promotion" @click="goUavLinkage">无人机联动</ElButton>
+        <ElButton size="small" :icon="Back" @click="backToEvent">返回事件</ElButton>
+      </div>
     </div>
 
     <div class="main-row">
@@ -81,7 +91,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { Back, FolderOpened } from '@element-plus/icons-vue'
+import { Back, FolderOpened, Promotion } from '@element-plus/icons-vue'
 import { useDeviceStore } from '@/store/modules/device'
 import {
   getOpticDeviceList, getOpticState, controlOptic,
@@ -119,8 +129,27 @@ const alertLevelLabel: Record<string, string> = { urgent: '紧急', important: '
 const alertLevelTag: Record<string, 'danger' | 'warning' | 'primary' | 'info'> = { urgent: 'danger', important: 'warning', normal: 'primary', tip: 'info' }
 const statusLabel: Record<number, string> = { 1: '在线', 0: '离线', 2: '故障' }
 const statusTag: Record<string, 'success' | 'info' | 'warning' | 'danger'> = { pending: 'danger', disposing: 'warning', closed: 'success', archived: 'info' }
+const eventStatusLabel: Record<string, string> = { pending: '待核验', disposing: '处置中', closed: '已闭环', archived: '已归档' }
 const linkContext = computed(() => deviceStore.linkContext)
 const filteredDevices = computed(() => opticDevices.value.filter((d) => statusFilter.value === 'all' || (statusFilter.value === 'online' ? d.status === 1 : d.status !== 1)))
+
+function haversine(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const rad = (d: number) => (d * Math.PI) / 180
+  const R = 6371
+  const dLat = rad(lat2 - lat1)
+  const dLng = rad(lng2 - lng1)
+  const s = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(s))
+}
+
+/** 当前光电设备与告警目标的距离（km） */
+const targetDistance = computed(() => {
+  const loc = linkContext.value?.location
+  const device = selectedDevice.value
+  if (!loc || !device || device.lat == null || device.lng == null) return null
+  return haversine(loc.lat, loc.lng, device.lat, device.lng)
+})
+const targetDistanceText = computed(() => (targetDistance.value == null ? '-' : `${targetDistance.value.toFixed(1)}km`))
 
 /** 加载光电设备列表 */
 async function loadDevices() {
@@ -270,14 +299,61 @@ function backToEvent() {
   router.push(linkContext.value?.sourceRoute || '/alert/event')
 }
 
+/** 从查询参数重建联动上下文，保证刷新或从无人机页返回后信息完整 */
+function readLinkContextFromQuery() {
+  const q = route.query
+  const eventId = Number(q.eventId)
+  if (!eventId) return
+  const lat = Number(q.lat)
+  const lng = Number(q.lng)
+  deviceStore.setLinkContext({
+    eventId,
+    targetId: String(q.targetId || ''),
+    deviceId: Number(q.deviceId) || undefined,
+    opticDeviceId: Number(q.opticDeviceId) || undefined,
+    sourceRoute: String(q.sourceRoute || '/alert/event'),
+    eventName: String(q.eventName || ''),
+    targetName: String(q.targetName || ''),
+    targetMmsi: String(q.targetMmsi || ''),
+    ruleName: String(q.ruleName || ''),
+    alertLevel: String(q.alertLevel || ''),
+    status: String(q.status || ''),
+    location: lat && lng ? { lat, lng, address: String(q.address || '') } : undefined,
+    triggerTime: String(q.triggerTime || ''),
+    fromOptics: q.fromOptics === '1'
+  })
+}
+
+/** 跳转新无人机联动页，携带完整事件上下文与光电设备信息 */
+function goUavLinkage() {
+  const ctx = linkContext.value
+  if (!ctx) return
+  const query: Record<string, string> = {
+    eventId: String(ctx.eventId || ''),
+    targetId: ctx.targetId || '',
+    eventName: ctx.eventName || '',
+    targetName: ctx.targetName || '',
+    targetMmsi: ctx.targetMmsi || '',
+    ruleName: ctx.ruleName || '',
+    alertLevel: ctx.alertLevel || '',
+    status: ctx.status || '',
+    triggerTime: ctx.triggerTime || '',
+    sourceRoute: ctx.sourceRoute || '/alert/event',
+    opticDeviceId: String(selectedDevice.value?.id || ctx.deviceId || ''),
+    fromOptics: '1'
+  }
+  if (ctx.location) {
+    query.lat = String(ctx.location.lat ?? '')
+    query.lng = String(ctx.location.lng ?? '')
+    query.address = String(ctx.location.address || '')
+  }
+  router.push({ path: '/device/uav-linkage', query })
+}
+
 onMounted(async () => {
   await loadDevices()
   const queryDeviceId = Number(route.query.deviceId)
-  const queryEventId = Number(route.query.eventId)
-  const queryTargetId = String(route.query.targetId || '')
-  if (queryEventId) {
-    deviceStore.setLinkContext({ eventId: queryEventId, targetId: queryTargetId || undefined, deviceId: queryDeviceId || undefined })
-  }
+  readLinkContextFromQuery()
   const target = opticDevices.value.find((d) => d.id === queryDeviceId)
     || opticDevices.value.find((d) => d.id === deviceStore.selectedDeviceId)
     || opticDevices.value.find((d) => d.status === 1)
@@ -297,6 +373,8 @@ onBeforeUnmount(() => {
 .optic-page { display: flex; flex-direction: column; gap: 12px; height: 100%; position: relative; }
 .context-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 8px; background: var(--el-color-warning-light-9); }
 .context-info { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--el-text-color-regular); }
+.context-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.context-coord, .context-time { color: var(--el-text-color-secondary); }
 .main-row { display: flex; gap: 12px; flex: 1; min-height: 0; }
 .device-list-card { width: 230px; flex: none; :deep(.el-card__body) { height: 100%; padding: 10px; overflow: auto; } }
 .list-header { font-size: 15px; font-weight: 600; margin-bottom: 10px; }

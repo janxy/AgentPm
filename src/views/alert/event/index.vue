@@ -379,6 +379,7 @@ import {
   getAlertEventList, getAlertEventStats, updateAlertEvent, addEventTimeline,
   getFalseAlarmStats, getRuleVersions, rollbackVersion
 } from '@/api/alert'
+import { getOpticDeviceList } from '@/api/device'
 
 defineOptions({ name: 'AlertEvent' })
 
@@ -411,21 +412,63 @@ async function loadEvents() {
 
 function resetReceptionFilter() { filterR.keyword = ''; filterR.alertLevel = ''; filterR.status = ''; eventPage.page = 1; loadEvents() }
 
-/** 跳转光电联动并写入事件上下文 */
-function openLinkage(row: any) {
+function haversine(lat1: number, lng1: number, lat2: number, lng2: number) {
+  const rad = (d: number) => (d * Math.PI) / 180
+  const R = 6371
+  const dLat = rad(lat2 - lat1)
+  const dLng = rad(lng2 - lng1)
+  const s = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLng / 2) ** 2
+  return 2 * R * Math.asin(Math.sqrt(s))
+}
+
+/** 跳转光电联动：自动选择距告警点最近的在线光电设备 */
+async function openLinkage(row: any) {
+  let deviceId = 101
+  try {
+    const { data } = await getOpticDeviceList()
+    const optics = (data as any)?.list || []
+    const loc = row.location
+    if (loc && optics.length > 0) {
+      const pool = optics.some((d: any) => d.status === 1) ? optics.filter((d: any) => d.status === 1) : optics
+      const nearest = [...pool].sort((a: any, b: any) => haversine(loc.lat, loc.lng, a.lat, a.lng) - haversine(loc.lat, loc.lng, b.lat, b.lng))[0]
+      if (nearest) deviceId = nearest.id
+    }
+  } catch { /* 设备列表加载失败时使用默认设备 */ }
+
+  const query: Record<string, string> = {
+    deviceId: String(deviceId),
+    eventId: String(row.id),
+    targetId: row.targetId || '',
+    eventName: `告警事件 #${row.id}`,
+    targetName: row.targetName || '',
+    targetMmsi: row.targetMmsi || '',
+    ruleName: row.ruleName || '',
+    alertLevel: row.alertLevel || '',
+    status: row.status || '',
+    triggerTime: row.triggerTime || '',
+    sourceRoute: '/alert/event'
+  }
+  if (row.location) {
+    query.lat = String(row.location.lat ?? '')
+    query.lng = String(row.location.lng ?? '')
+    query.address = String(row.location.address || '')
+  }
+
   deviceStore.setLinkContext({
     eventId: row.id,
     targetId: row.targetId,
-    deviceId: 101,
+    deviceId,
     sourceRoute: '/alert/event',
     eventName: `告警事件 #${row.id}`,
     targetName: row.targetName,
     targetMmsi: row.targetMmsi,
     ruleName: row.ruleName,
     alertLevel: row.alertLevel,
-    status: row.status
+    status: row.status,
+    location: row.location ? { ...row.location } : undefined,
+    triggerTime: row.triggerTime
   })
-  router.push({ path: '/device/optics', query: { deviceId: '101', eventId: String(row.id), targetId: row.targetId } })
+  router.push({ path: '/device/optics', query })
 }
 
 // Tab2: 报警处置流程

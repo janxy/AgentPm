@@ -17,6 +17,10 @@ export interface DeviceLinkContext {
   ruleName?: string
   alertLevel?: string
   status?: string
+  location?: { lat: number; lng: number; address?: string }
+  triggerTime?: string
+  fromOptics?: boolean
+  opticDeviceId?: number
 }
 
 /**
