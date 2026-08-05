@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } 
 import { useUserStore } from '@/store/modules/user'
 import { ApiStatus } from './status'
 import { HttpError, handleError, showError, showSuccess } from './error'
-import { $t } from '@/locales'
 import { matchMock } from './mockRegistry'
 
 /** 请求配置常量 */
@@ -66,7 +65,7 @@ axiosInstance.interceptors.request.use(
     return request
   },
   (error) => {
-    showError(createHttpError($t('httpMsg.requestConfigError'), ApiStatus.error))
+    showError(createHttpError('请求配置错误', ApiStatus.error))
     return Promise.reject(error)
   }
 )
@@ -88,7 +87,7 @@ axiosInstance.interceptors.response.use(
     if (code === ApiStatus.unauthorized && !config.skipAuthHandler) {
       handleUnauthorizedError(errorMessage)
     }
-    throw createHttpError(errorMessage || $t('httpMsg.requestFailed'), code)
+    throw createHttpError(errorMessage || '请求失败', code)
   },
   (error) => {
     const config = error.config as ExtendedAxiosRequestConfig | undefined
@@ -106,7 +105,7 @@ function createHttpError(message: string, code: number) {
 
 /** 处理401错误（带防抖） */
 function handleUnauthorizedError(message?: string): never {
-  const error = createHttpError(message || $t('httpMsg.unauthorized'), ApiStatus.unauthorized)
+  const error = createHttpError(message || '未授权访问，请重新登录', ApiStatus.unauthorized)
 
   if (!isUnauthorizedErrorShown) {
     isUnauthorizedErrorShown = true

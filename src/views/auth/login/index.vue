@@ -18,27 +18,26 @@
 
       <!-- 右侧表单区 -->
       <div class="form-panel">
-        <h3 class="form-title">{{ $t('login.title') }}</h3>
-        <p class="form-subtitle">{{ $t('login.subTitle') }}</p>
+        <h3 class="form-title">欢迎回来</h3>
+        <p class="form-subtitle">输入您的账号和密码登录</p>
 
         <ElForm
           ref="formRef"
           :model="formData"
           :rules="rules"
-          :key="formKey"
           @keyup.enter="handleSubmit"
           class="login-form"
         >
           <ElFormItem prop="username">
             <ElInput
-              :placeholder="$t('login.placeholder.username')"
+              placeholder="请输入账号"
               v-model.trim="formData.username"
               :prefix-icon="User"
             />
           </ElFormItem>
           <ElFormItem prop="password">
             <ElInput
-              :placeholder="$t('login.placeholder.password')"
+              placeholder="请输入密码"
               v-model.trim="formData.password"
               type="password"
               autocomplete="off"
@@ -48,13 +47,11 @@
           </ElFormItem>
 
           <div class="form-options">
-            <ElCheckbox v-model="formData.rememberPassword">{{
-              $t('login.rememberPwd')
-            }}</ElCheckbox>
+            <ElCheckbox v-model="formData.rememberPassword">记住密码</ElCheckbox>
           </div>
 
           <ElButton class="login-btn" type="primary" @click="handleSubmit" :loading="loading">
-            {{ $t('login.btnText') }}
+            登录
           </ElButton>
 
           <p class="default-account">默认账号：admin / 123456</p>
@@ -69,20 +66,11 @@
 <script setup lang="ts">
   import { useUserStore } from '@/store/modules/user'
   import { useSettingStore } from '@/store/modules/setting'
-  import { useI18n } from 'vue-i18n'
   import { fetchLogin, fetchGetUserInfo } from '@/api/auth'
   import { ElNotification, type FormInstance, type FormRules } from 'element-plus'
   import { User, Lock, Grid } from '@element-plus/icons-vue'
 
   defineOptions({ name: 'Login' })
-
-  const { t, locale } = useI18n()
-  const formKey = ref(0)
-
-  // 监听语言切换，重置表单
-  watch(locale, () => {
-    formKey.value++
-  })
 
   const userStore = useUserStore()
   const settingStore = useSettingStore()
@@ -99,8 +87,8 @@
   })
 
   const rules = computed<FormRules>(() => ({
-    username: [{ required: true, message: t('login.placeholder.username'), trigger: 'blur' }],
-    password: [{ required: true, message: t('login.placeholder.password'), trigger: 'blur' }]
+    username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
   }))
 
   const loading = ref(false)
@@ -152,11 +140,11 @@
   const showLoginSuccessNotice = () => {
     setTimeout(() => {
       ElNotification({
-        title: t('login.success.title'),
+        title: '登录成功',
         type: 'success',
         duration: 2500,
         zIndex: 10000,
-        message: `${t('login.success.message')}, ${systemName.value}!`
+        message: `欢迎回来, ${systemName.value}!`
       })
     }, 150)
   }

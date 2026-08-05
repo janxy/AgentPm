@@ -26,7 +26,7 @@
             <ElTooltip
               class="box-item"
               effect="dark"
-              :content="$t(menu.meta.title)"
+              :content="menu.meta.title"
               placement="right"
               :offset="25"
               :hide-after="0"
@@ -50,7 +50,7 @@
                   <component :is="getIconComponent(menu.meta.icon)" />
                 </el-icon>
                 <span v-if="dualMenuShowText">
-                  {{ $t(menu.meta.title) }}
+                  {{ menu.meta.title }}
                 </span>
                 <div v-if="menu.meta.showBadge" class="art-badge art-badge-dual" />
               </div>

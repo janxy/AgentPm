@@ -127,7 +127,7 @@ mockRoute('DELETE', '/admin/sys/menu/delete/:id', ({ url }) => {
 import {
   getAreaListMock, addAreaMock, updateAreaMock, deleteAreaMock,
   getApprovalListMock, approveMock,
-  getFenceRuleListMock, getFenceRulesAllMock, addFenceRuleMock, updateFenceRuleMock, deleteFenceRuleMock, updateFenceRuleStatusMock,
+  getFenceRuleListMock, addFenceRuleMock, updateFenceRuleMock, deleteFenceRuleMock, updateFenceRuleStatusMock,
   getBlacklistMock, addBlacklistMock, updateBlacklistMock, deleteBlacklistMock, updateBlacklistStatusMock,
   getBehaviorRuleListMock, updateBehaviorRuleMock,
   getAlertEventListMock, getAlertEventStatsMock, updateAlertEventMock, addEventTimelineMock,
@@ -145,7 +145,6 @@ mockRoute('PUT', '/admin/alert/area/approve/:id', ({ url, data }) => approveMock
 
 // 围栏规则
 mockRoute('GET', '/admin/alert/rule/fence/list', ({ params }) => getFenceRuleListMock(params))
-mockRoute('GET', '/admin/alert/rule/fence/all', () => getFenceRulesAllMock())
 mockRoute('POST', '/admin/alert/rule/fence/add', ({ data }) => addFenceRuleMock(data))
 mockRoute('PUT', '/admin/alert/rule/fence/update/:id', ({ url, data }) => updateFenceRuleMock(extractId(url), data))
 mockRoute('DELETE', '/admin/alert/rule/fence/delete/:id', ({ url }) => { deleteFenceRuleMock(extractId(url)); return {} })

@@ -5,7 +5,7 @@ export const exceptionRoutes: AppRouteRecord = {
   name: 'Exception',
   component: () => import('@/views/index/index.vue'),
   meta: {
-    title: 'menus.exception.title',
+    title: '异常页',
     icon: 'Warning'
   },
   children: [
@@ -14,7 +14,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception403',
       component: () => import('@/views/exception/403/index.vue'),
       meta: {
-        title: 'menus.exception.forbidden',
+        title: '禁止访问',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true
@@ -25,7 +25,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception404',
       component: () => import('@/views/exception/404/index.vue'),
       meta: {
-        title: 'menus.exception.notFound',
+        title: '页面不存在',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true
@@ -36,7 +36,7 @@ export const exceptionRoutes: AppRouteRecord = {
       name: 'Exception500',
       component: () => import('@/views/exception/500/index.vue'),
       meta: {
-        title: 'menus.exception.serverError',
+        title: '服务器错误',
         keepAlive: true,
         isHideTab: true,
         isFullPage: true

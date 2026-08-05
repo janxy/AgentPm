@@ -52,10 +52,9 @@
             </ElTag>
           </template>
         </ElTableColumn>
-        <ElTableColumn label="操作" width="240" align="center" fixed="right">
+        <ElTableColumn label="操作" width="180" align="center" fixed="right">
           <template #default="{ row }">
             <ElButton link type="primary" @click="handleEdit(row)">编辑</ElButton>
-            <ElButton link type="primary" @click="openBindDialog(row)">绑定规则</ElButton>
             <ElButton link type="danger" @click="handleDelete(row)" class="annot-alert-area-table-delete">删除</ElButton>
           </template>
         </ElTableColumn>
@@ -163,32 +162,6 @@
       </div>
     </ElDialog>
 
-    <!-- 绑定规则弹窗 -->
-    <ElDialog v-model="bindDialogVisible" title="绑定预警规则" width="560px">
-      <ElCheckboxGroup v-model="bindForm.ruleIds" class="annot-alert-area-bind-rules">
-        <div v-for="rule in fenceRules" :key="rule.id" class="bind-rule-item">
-          <ElCheckbox :value="rule.id">{{ rule.name }}</ElCheckbox>
-          <ElSelect
-            v-if="bindForm.ruleIds.includes(rule.id)"
-            v-model="bindForm.levels[rule.id]"
-            placeholder="触发等级"
-            size="small"
-            class="bind-level-select annot-alert-area-bind-level"
-          >
-            <ElOption label="提示" value="tip" />
-            <ElOption label="一般" value="normal" />
-            <ElOption label="重要" value="important" />
-            <ElOption label="紧急" value="urgent" />
-          </ElSelect>
-        </div>
-      </ElCheckboxGroup>
-      <div v-if="fenceRules.length === 0" class="bind-empty">暂无可用围栏规则</div>
-      <template #footer>
-        <ElButton @click="bindDialogVisible = false">取消</ElButton>
-        <ElButton type="primary" @click="saveBindRules" class="annot-alert-area-bind-save">保存</ElButton>
-      </template>
-    </ElDialog>
-
     <!-- 审批弹窗 -->
     <ElDialog v-model="showApprovalDialog" title="区域变更审批" width="800px">
       <ElTable :data="approvalList" v-loading="approvalLoading" class="annot-alert-area-approval-table">
@@ -228,7 +201,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import {
   getAreaList, addArea, updateArea, deleteArea,
-  getApprovalList, approveArea, getFenceRulesAll
+  getApprovalList, approveArea
 } from '@/api/alert'
 
 defineOptions({ name: 'AlertArea' })
@@ -288,12 +261,6 @@ const canSaveDraw = ref(false)
 // ---- 小地图 ----
 const miniMapContainer = ref<HTMLDivElement>()
 let miniMap: L.Map | null = null
-
-// ---- 绑定规则 ----
-const bindDialogVisible = ref(false)
-const bindAreaId = ref<number | null>(null)
-const fenceRules = ref<any[]>([])
-const bindForm = reactive<{ ruleIds: number[]; levels: Record<number, string> }>({ ruleIds: [], levels: {} })
 
 // ---- 审批 ----
 const showApprovalDialog = ref(false)
@@ -689,42 +656,10 @@ async function handleSubmit() {
   } catch { ElMessage.error('操作失败') } finally { submitLoading.value = false }
 }
 
-// ========== 绑定规则 ==========
-function openBindDialog(row: any) {
-  bindAreaId.value = row.id
-  bindForm.ruleIds = (row.bindRules || []).map((r: any) => r.ruleId)
-  bindForm.levels = {}
-  ;(row.bindRules || []).forEach((r: any) => { bindForm.levels[r.ruleId] = r.level || 'normal' })
-  bindDialogVisible.value = true
-}
-
-async function saveBindRules() {
-  try {
-    await updateArea(bindAreaId.value!, {
-      bindRules: bindForm.ruleIds.map((id) => ({
-        ruleId: id,
-        ruleName: fenceRules.value.find((r: any) => r.id === id)?.name || '',
-        level: bindForm.levels[id] || 'normal',
-        notifyChannels: ['弹窗'],
-      })),
-    })
-    ElMessage.success('绑定成功')
-    bindDialogVisible.value = false; loadAreaList()
-  } catch { ElMessage.error('绑定失败') }
-}
-
 // ========== 删除 / 审批 ==========
 async function handleDelete(row: any) {
-  const hasBind = (row.bindRules || []).length > 0
   try {
-    if (hasBind) {
-      await ElMessageBox.confirm(
-        `该区域已被 ${row.bindRules.length} 条规则关联，删除后关联规则将失效，确定删除？`,
-        '警告', { type: 'warning', confirmButtonText: '确定删除' },
-      )
-    } else {
-      await ElMessageBox.confirm('确定删除该区域吗？删除后不可恢复。', '确认删除', { type: 'warning' })
-    }
+    await ElMessageBox.confirm('确定删除该区域吗？删除后不可恢复。', '确认删除', { type: 'warning' })
     await deleteArea(row.id)
     ElMessage.success('删除成功'); loadAreaList()
   } catch { /* cancel */ }
@@ -747,11 +682,6 @@ async function handleApprove(row: any, result: string) {
   } catch { ElMessage.error('操作失败') }
 }
 
-// ========== 生命周期 ==========
-async function loadFenceRules() {
-  try { const { data } = await getFenceRulesAll(); fenceRules.value = (data as any) || [] } catch { /* ignore */ }
-}
-
 function resetForm() {
   formRef.value?.resetFields()
   destroyMiniMap()
@@ -759,7 +689,6 @@ function resetForm() {
 
 onMounted(() => {
   loadAreaList()
-  loadFenceRules()
   loadApprovalList()
 })
 </script>
@@ -800,20 +729,6 @@ onMounted(() => {
   border-radius: 6px;
   border: 1px solid var(--el-border-color);
   overflow: hidden;
-}
-
-.bind-rule-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--el-border-color-lighter);
-}
-.bind-level-select { width: 100px; }
-.bind-empty {
-  padding: 40px;
-  text-align: center;
-  color: var(--el-text-color-secondary);
 }
 
 .approval-compare {

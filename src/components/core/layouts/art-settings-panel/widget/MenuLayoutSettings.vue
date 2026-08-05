@@ -1,6 +1,6 @@
 <template>
   <div v-if="width > 1000">
-    <SectionTitle :title="$t('setting.menuType.title')" />
+    <SectionTitle title="菜单布局" />
     <div class="setting-box-wrap">
       <div
         class="setting-item"
@@ -11,7 +11,7 @@
         <div class="box" :class="{ 'is-active': item.value === menuType, 'mt-16': index > 2 }">
           <img :src="item.img" />
         </div>
-        <p class="name">{{ $t(`setting.menuType.list[${index}]`) }}</p>
+        <p class="name">{{ menuLayoutNames[index] }}</p>
       </div>
     </div>
   </div>
@@ -28,4 +28,6 @@
   const { menuType } = storeToRefs(settingStore)
   const { configOptions } = useSettingsConfig()
   const { switchMenuLayouts } = useSettingsState()
+
+  const menuLayoutNames = ['垂直', '水平', '混合', '双列']
 </script>

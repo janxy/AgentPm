@@ -4,7 +4,10 @@
     <ElSubMenu v-if="hasChildren(item)" :index="item.path || item.meta?.title" :level="level">
       <template #title>
         <MenuItemIcon :icon="item.meta?.icon" :color="theme?.iconColor" />
-        <span class="menu-name">
+        <span
+          class="menu-name"
+          :class="{ 'menu-deprecated': item.meta?.deprecated }"
+        >
           {{ formatMenuTitle(item.meta?.title) }}
         </span>
         <div v-if="item.meta?.showBadge" class="art-badge" style="right: 10px" />
@@ -34,7 +37,10 @@
       />
 
       <template #title>
-        <span class="menu-name">
+        <span
+          class="menu-name"
+          :class="{ 'menu-deprecated': item.meta?.deprecated }"
+        >
           {{ formatMenuTitle(item.meta?.title) }}
         </span>
         <div v-if="item.meta?.showBadge" class="art-badge" />
@@ -205,3 +211,9 @@
     }
   })
 </script>
+
+<style lang="scss" scoped>
+  .menu-deprecated {
+    text-decoration: line-through;
+  }
+</style>

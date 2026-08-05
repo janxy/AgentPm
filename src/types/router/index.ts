@@ -17,6 +17,8 @@ export interface RouteMeta extends Record<string | number | symbol, unknown> {
   showBadge?: boolean
   /** 文本徽章 */
   showTextBadge?: string
+  /** 是否已弃用 */
+  deprecated?: boolean
   /** 是否在菜单中隐藏 */
   isHide?: boolean
   /** 是否在标签页中隐藏 */

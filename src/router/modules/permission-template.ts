@@ -9,7 +9,7 @@ export const permissionTemplateRoutes: AppRouteRecord = {
   name: 'PermissionTemplate',
   component: () => import('@/views/index/index.vue'),
   meta: {
-    title: 'menus.permissionTemplate.title',
+    title: '权限管理',
     icon: 'Lock', // 权限管理
     isFirstLevel: true
   },
@@ -19,7 +19,7 @@ export const permissionTemplateRoutes: AppRouteRecord = {
       name: 'PermissionTemplateIndex',
       component: () => import('@/views/permission/role/index.vue'),
       meta: {
-        title: 'menus.permissionTemplate.title',
+        title: '权限管理',
         keepAlive: true,
         isHide: true
       }
@@ -29,7 +29,7 @@ export const permissionTemplateRoutes: AppRouteRecord = {
       name: 'PermissionTemplateRole',
       component: () => import('@/views/permission/role/index.vue'),
       meta: {
-        title: 'menus.permissionTemplate.role',
+        title: '角色管理',
         keepAlive: true
       }
     },
@@ -38,7 +38,7 @@ export const permissionTemplateRoutes: AppRouteRecord = {
       name: 'PermissionTemplateMenu',
       component: () => import('@/views/permission/menu/index.vue'),
       meta: {
-        title: 'menus.permissionTemplate.menu',
+        title: '菜单管理',
         keepAlive: true
       }
     }

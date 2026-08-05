@@ -15,7 +15,7 @@ export const deviceRoutes: AppRouteRecord = {
   name: 'Device',
   component: () => import('@/views/index/index.vue'),
   meta: {
-    title: 'menus.device.title',
+    title: '设备联动',
     icon: 'Monitor',
     isFirstLevel: true
   },
@@ -24,31 +24,31 @@ export const deviceRoutes: AppRouteRecord = {
       path: '',
       name: 'DeviceIndex',
       redirect: '/device/overview',
-      meta: { title: 'menus.device.title', isHide: true }
+      meta: { title: '设备联动', isHide: true }
     },
     {
       path: 'overview',
       name: 'DeviceOverview',
       component: () => import('@/views/device/overview/index.vue'),
-      meta: { title: 'menus.device.overview', keepAlive: true }
+      meta: { title: '设备总览', keepAlive: true }
     },
     {
       path: 'optics',
       name: 'DeviceOptics',
       component: () => import('@/views/device/optics/index.vue'),
-      meta: { title: 'menus.device.optics', keepAlive: true }
+      meta: { title: '光电联动', keepAlive: true }
     },
     {
       path: 'uav',
       name: 'DeviceUav',
       component: () => import('@/views/device/uav/index.vue'),
-      meta: { title: 'menus.device.uav', keepAlive: true }
+      meta: { title: '无人机联动（已弃用）', keepAlive: true, deprecated: true }
     },
     {
       path: 'radar',
       name: 'DeviceRadar',
       component: () => import('@/views/device/radar/index.vue'),
-      meta: { title: 'menus.device.radar', keepAlive: true }
+      meta: { title: '雷达监测（已弃用）', keepAlive: true, deprecated: true }
     }
   ]
 }

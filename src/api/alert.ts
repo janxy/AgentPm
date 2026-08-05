@@ -29,9 +29,6 @@ export function approveArea(id: number, result: string) { return request.put({ u
 /** 获取围栏规则列表 */
 export function getFenceRuleList(params?: any) { return request.get({ url: '/admin/alert/rule/fence/list', params }) }
 
-/** 获取全部已启用围栏规则（供下拉选择） */
-export function getFenceRulesAll() { return request.get({ url: '/admin/alert/rule/fence/all' }) }
-
 /** 新增围栏规则 */
 export function addFenceRule(data: any) { return request.post({ url: '/admin/alert/rule/fence/add', data }) }
 

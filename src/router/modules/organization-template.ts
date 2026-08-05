@@ -9,7 +9,7 @@ export const organizationTemplateRoutes: AppRouteRecord = {
   name: 'OrganizationTemplate',
   component: () => import('@/views/index/index.vue'),
   meta: {
-    title: 'menus.organizationTemplate.title',
+    title: '组织管理',
     icon: 'OfficeBuilding',
     isFirstLevel: true
   },
@@ -19,7 +19,7 @@ export const organizationTemplateRoutes: AppRouteRecord = {
       name: 'OrganizationTemplateIndex',
       component: () => import('@/views/organization/department/index.vue'),
       meta: {
-        title: 'menus.organizationTemplate.title',
+        title: '组织管理',
         keepAlive: true,
         isHide: true
       }
@@ -29,7 +29,7 @@ export const organizationTemplateRoutes: AppRouteRecord = {
       name: 'OrganizationTemplateDepartment',
       component: () => import('@/views/organization/department/index.vue'),
       meta: {
-        title: 'menus.organizationTemplate.department',
+        title: '部门管理',
         keepAlive: true
       }
     },
@@ -38,7 +38,7 @@ export const organizationTemplateRoutes: AppRouteRecord = {
       name: 'OrganizationTemplateUser',
       component: () => import('@/views/organization/user/index.vue'),
       meta: {
-        title: 'menus.organizationTemplate.user',
+        title: '人员管理',
         keepAlive: true
       }
     },
@@ -47,7 +47,7 @@ export const organizationTemplateRoutes: AppRouteRecord = {
       name: 'OrganizationTemplatePosition',
       component: () => import('@/views/organization/position/index.vue'),
       meta: {
-        title: 'menus.organizationTemplate.position',
+        title: '岗位管理',
         keepAlive: true
       }
     }

@@ -133,7 +133,7 @@
         "y": 0
       },
       "title": "区域列表",
-      "content": "展示区域列表，包含：区域名称（点击可定位到地图）、类型（标签：重点区域-橙色/禁入区域-红色/巡检区域-蓝色）、有效期（YYYY-MM-DD至YYYY-MM-DD，过期后自动变更为已失效）、状态（标签：生效-绿色/待审批-黄色/已失效-灰色）、操作（编辑/删除/绑定规则）。列表为空时显示“暂无区域数据”。",
+      "content": "展示区域列表，包含：区域名称（点击可定位到地图）、类型（标签：重点区域-橙色/禁入区域-红色/巡检区域-蓝色）、有效期（YYYY-MM-DD至YYYY-MM-DD，过期后自动变更为已失效）、状态（标签：生效-绿色/待审批-黄色/已失效-灰色）、操作（编辑/删除）。列表为空时显示“暂无区域数据”。",
       "category": "table",
       "source": "SRS 3.5.1 列表功能",
       "container": "",
@@ -148,7 +148,7 @@
         "y": 0
       },
       "title": "删除区域",
-      "content": "点击弹出确认“确定删除该区域吗？删除后不可恢复。”若该区域已被电子围栏规则关联，阻止删除并提示“该区域已被X条规则关联，删除后关联规则将失效，请先解除绑定”。删除成功提示“删除成功”。",
+      "content": "点击弹出确认“确定删除该区域吗？删除后不可恢复。”删除成功提示“删除成功”。",
       "category": "delete",
       "source": "SRS 3.5.1 删除功能",
       "container": "",
@@ -437,51 +437,6 @@
       "category": "draw",
       "source": "SRS 3.5.1 地图绘制工具",
       "container": "drawer",
-      "createdAt": "2026-07-30"
-    },
-    {
-      "id": "annot-alert-area-bind-rules",
-      "type": "selector",
-      "selector": ".annot-alert-area-bind-rules",
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "title": "绑定预警规则列表",
-      "content": "勾选已创建的电子围栏规则（数据来源于预警规则管理-电子围栏）。每行显示规则名称，勾选后可设置触发等级。若无可用的围栏规则，显示“暂无可用围栏规则”。",
-      "category": "bind",
-      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
-      "container": "dialog",
-      "createdAt": "2026-07-30"
-    },
-    {
-      "id": "annot-alert-area-bind-level",
-      "type": "selector",
-      "selector": ".annot-alert-area-bind-level",
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "title": "触发等级",
-      "content": "勾选规则后显示触发等级下拉选择：提示、一般、重要、紧急。每条已勾选的规则独立设置等级。",
-      "category": "bind",
-      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
-      "container": "dialog",
-      "createdAt": "2026-07-30"
-    },
-    {
-      "id": "annot-alert-area-bind-save",
-      "type": "selector",
-      "selector": ".annot-alert-area-bind-save",
-      "position": {
-        "x": 0,
-        "y": 0
-      },
-      "title": "保存绑定",
-      "content": "保存选中的规则绑定关系及触发等级设置。",
-      "category": "bind",
-      "source": "SRS 3.5.1 编辑功能-绑定预警规则",
-      "container": "dialog",
       "createdAt": "2026-07-30"
     },
     {

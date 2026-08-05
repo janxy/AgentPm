@@ -22,19 +22,19 @@ export const staticRoutes: AppRouteRecordRaw[] = [
     path: '/auth/login',
     name: 'Login',
     component: () => import('@views/auth/login/index.vue'),
-    meta: { title: 'menus.login.title', isHideTab: true }
+    meta: { title: '登录', isHideTab: true }
   },
   {
     path: '/auth/register',
     name: 'Register',
     component: () => import('@views/auth/register/index.vue'),
-    meta: { title: 'menus.register.title', isHideTab: true }
+    meta: { title: '注册', isHideTab: true }
   },
   {
     path: '/auth/forget-password',
     name: 'ForgetPassword',
     component: () => import('@views/auth/forget-password/index.vue'),
-    meta: { title: 'menus.forgetPassword.title', isHideTab: true }
+    meta: { title: '忘记密码', isHideTab: true }
   },
   {
     path: '/403',

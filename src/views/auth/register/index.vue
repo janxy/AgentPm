@@ -9,26 +9,25 @@
       </div>
       <div class="login-wrap">
         <div class="form">
-          <h3 class="title">{{ $t('register.title') }}</h3>
-          <p class="sub-title">{{ $t('register.subTitle') }}</p>
+          <h3 class="title">创建账号</h3>
+          <p class="sub-title">欢迎加入我们，请填写以下信息完成注册</p>
           <ElForm
             ref="formRef"
             :model="formData"
             :rules="rules"
             label-position="top"
-            :key="formKey"
           >
             <ElFormItem prop="username">
               <ElInput
                 v-model.trim="formData.username"
-                :placeholder="$t('register.placeholder.username')"
+                placeholder="请输入账号"
               />
             </ElFormItem>
 
             <ElFormItem prop="password">
               <ElInput
                 v-model.trim="formData.password"
-                :placeholder="$t('register.placeholder.password')"
+                placeholder="请输入密码"
                 type="password"
                 autocomplete="off"
                 show-password
@@ -38,7 +37,7 @@
             <ElFormItem prop="confirmPassword">
               <ElInput
                 v-model.trim="formData.confirmPassword"
-                :placeholder="$t('register.placeholder.confirmPassword')"
+                placeholder="请再次输入密码"
                 type="password"
                 autocomplete="off"
                 @keyup.enter="register"
@@ -48,11 +47,11 @@
 
             <ElFormItem prop="agreement">
               <ElCheckbox v-model="formData.agreement">
-                {{ $t('register.agreeText') }}
+                我同意
                 <router-link
                   style="color: var(--main-color); text-decoration: none"
                   to="/privacy-policy"
-                  >{{ $t('register.privacyPolicy') }}</router-link
+                  >《隐私政策》</router-link
                 >
               </ElCheckbox>
             </ElFormItem>
@@ -65,14 +64,14 @@
                 :loading="loading"
                 v-ripple
               >
-                {{ $t('register.submitBtnText') }}
+                注册
               </ElButton>
             </div>
 
             <div class="footer">
               <p>
-                {{ $t('register.hasAccount') }}
-                <router-link :to="{ name: 'Login' }">{{ $t('register.toLogin') }}</router-link>
+                已有账号？
+                <router-link :to="{ name: 'Login' }">去登录</router-link>
               </p>
             </div>
           </ElForm>
@@ -84,7 +83,6 @@
 
 <script setup lang="ts">
   import AppConfig from '@/config'
-  import { useI18n } from 'vue-i18n'
   import type { FormInstance, FormRules } from 'element-plus'
 
   defineOptions({ name: 'Register' })
@@ -101,18 +99,11 @@
   const PASSWORD_MIN_LENGTH = 6
   const REDIRECT_DELAY = 1000
 
-  const { t, locale } = useI18n()
   const router = useRouter()
   const formRef = ref<FormInstance>()
 
   const systemName = AppConfig.systemInfo.name
   const loading = ref(false)
-  const formKey = ref(0)
-
-  // 监听语言切换，重置表单
-  watch(locale, () => {
-    formKey.value++
-  })
 
   const formData = reactive<RegisterForm>({
     username: '',
@@ -127,7 +118,7 @@
    */
   const validatePassword = (_rule: any, value: string, callback: (error?: Error) => void) => {
     if (!value) {
-      callback(new Error(t('register.placeholder.password')))
+      callback(new Error('请输入密码'))
       return
     }
 
@@ -148,12 +139,12 @@
     callback: (error?: Error) => void
   ) => {
     if (!value) {
-      callback(new Error(t('register.rule.confirmPasswordRequired')))
+      callback(new Error('请再次输入密码'))
       return
     }
 
     if (value !== formData.password) {
-      callback(new Error(t('register.rule.passwordMismatch')))
+      callback(new Error('两次输入密码不一致!'))
       return
     }
 
@@ -166,7 +157,7 @@
    */
   const validateAgreement = (_rule: any, value: boolean, callback: (error?: Error) => void) => {
     if (!value) {
-      callback(new Error(t('register.rule.agreementRequired')))
+      callback(new Error('请同意隐私协议'))
       return
     }
     callback()
@@ -174,17 +165,17 @@
 
   const rules = computed<FormRules<RegisterForm>>(() => ({
     username: [
-      { required: true, message: t('register.placeholder.username'), trigger: 'blur' },
+      { required: true, message: '请输入账号', trigger: 'blur' },
       {
         min: USERNAME_MIN_LENGTH,
         max: USERNAME_MAX_LENGTH,
-        message: t('register.rule.usernameLength'),
+        message: '长度在 3 到 20 个字符',
         trigger: 'blur'
       }
     ],
     password: [
       { required: true, validator: validatePassword, trigger: 'blur' },
-      { min: PASSWORD_MIN_LENGTH, message: t('register.rule.passwordLength'), trigger: 'blur' }
+      { min: PASSWORD_MIN_LENGTH, message: '密码长度不能小于6位', trigger: 'blur' }
     ],
     confirmPassword: [{ required: true, validator: validateConfirmPassword, trigger: 'blur' }],
     agreement: [{ validator: validateAgreement, trigger: 'change' }]

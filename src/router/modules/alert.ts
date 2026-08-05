@@ -14,7 +14,7 @@ export const alertRoutes: AppRouteRecord = {
   name: 'Alert',
   component: () => import('@/views/index/index.vue'),
   meta: {
-    title: 'menus.alert.title',
+    title: '预警事件',
     icon: 'WarningFilled',
     isFirstLevel: true
   },
@@ -23,37 +23,37 @@ export const alertRoutes: AppRouteRecord = {
       path: '',
       name: 'AlertIndex',
       redirect: '/alert/area',
-      meta: { title: 'menus.alert.title', isHide: true }
+      meta: { title: '预警事件', isHide: true }
     },
     {
       path: 'area',
       name: 'AlertArea',
       component: () => import('@/views/alert/area/index.vue'),
-      meta: { title: 'menus.alert.area', keepAlive: true }
+      meta: { title: '地图区域管理', keepAlive: true }
     },
     {
       path: 'rule',
       name: 'AlertRule',
       redirect: '/alert/rule/fence',
-      meta: { title: 'menus.alert.rule._label', keepAlive: true },
+      meta: { title: '预警规则管理', keepAlive: true },
       children: [
         {
           path: 'fence',
           name: 'AlertRuleFence',
           component: () => import('@/views/alert/rule/fence/index.vue'),
-          meta: { title: 'menus.alert.rule.fence', keepAlive: true }
+          meta: { title: '电子围栏预警', keepAlive: true }
         },
         {
           path: 'blacklist',
           name: 'AlertRuleBlacklist',
           component: () => import('@/views/alert/rule/blacklist/index.vue'),
-          meta: { title: 'menus.alert.rule.blacklist', keepAlive: true }
+          meta: { title: '身份识别预警', keepAlive: true }
         },
         {
           path: 'behavior',
           name: 'AlertRuleBehavior',
           component: () => import('@/views/alert/rule/behavior/index.vue'),
-          meta: { title: 'menus.alert.rule.behavior', keepAlive: true }
+          meta: { title: '行为预警', keepAlive: true }
         }
       ]
     },
@@ -61,7 +61,7 @@ export const alertRoutes: AppRouteRecord = {
       path: 'event',
       name: 'AlertEvent',
       component: () => import('@/views/alert/event/index.vue'),
-      meta: { title: 'menus.alert.event', keepAlive: true }
+      meta: { title: '事件闭环管理', keepAlive: true }
     }
   ]
 }

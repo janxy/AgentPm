@@ -4,7 +4,9 @@
       <el-icon class="menu-icon" :style="{ color: theme?.iconColor }">
         <component :is="getIconComponent(item.meta.icon)" />
       </el-icon>
-      <span>{{ formatMenuTitle(item.meta.title) }}</span>
+      <span :class="{ 'menu-deprecated': item.meta.deprecated }">{{
+        formatMenuTitle(item.meta.title)
+      }}</span>
       <div v-if="item.meta.showBadge" class="art-badge art-badge-horizontal" />
       <div v-if="item.meta.showTextBadge" class="art-text-badge">
         {{ item.meta.showTextBadge }}
@@ -31,7 +33,9 @@
     <el-icon class="menu-icon" :style="{ color: theme?.iconColor }">
       <component :is="getIconComponent(item.meta.icon)" />
     </el-icon>
-    <span>{{ formatMenuTitle(item.meta.title) }}</span>
+    <span :class="{ 'menu-deprecated': item.meta.deprecated }">{{
+      formatMenuTitle(item.meta.title)
+    }}</span>
     <div
       v-if="item.meta.showBadge"
       class="art-badge"
@@ -105,5 +109,9 @@
   .menu-icon {
     margin-right: 5px;
     font-size: 16px;
+  }
+
+  .menu-deprecated {
+    text-decoration: line-through;
   }
 </style>

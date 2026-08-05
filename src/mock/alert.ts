@@ -19,9 +19,6 @@ let mockAreas = [
     managerId: 1,
     managerName: '管理员',
     remark: '东海演习期间禁航区域',
-    bindRules: [
-      { ruleId: 1, ruleName: '东海围栏规则', level: '重要', notifyChannels: ['弹窗', '短信'] }
-    ],
     status: 1,
     createTime: '2026-06-01 10:00:00',
     updateTime: '2026-07-15 14:30:00'
@@ -39,7 +36,6 @@ let mockAreas = [
     managerId: 3,
     managerName: '李四',
     remark: '港口进出船只重点监控',
-    bindRules: [],
     status: 1,
     createTime: '2026-03-01 08:00:00',
     updateTime: '2026-07-01 09:00:00'
@@ -57,9 +53,6 @@ let mockAreas = [
     managerId: 4,
     managerName: '王五',
     remark: '定期巡检区域',
-    bindRules: [
-      { ruleId: 2, ruleName: '巡检围栏-低速', level: '一般', notifyChannels: ['弹窗'] }
-    ],
     status: 1,
     createTime: '2026-05-01 10:00:00',
     updateTime: '2026-05-10 16:00:00'
@@ -78,7 +71,6 @@ let mockAreas = [
     managerId: 1,
     managerName: '管理员',
     remark: '石油平台周边5km警戒',
-    bindRules: [],
     status: 0,
     createTime: '2026-01-01 10:00:00',
     updateTime: '2026-07-28 09:00:00'
@@ -444,7 +436,7 @@ export const getAreaListMock = (params: any) => {
 }
 
 export const addAreaMock = (data: any) => {
-  const area = { ...data, id: nextAreaId++, status: 1, createTime: new Date().toISOString(), updateTime: new Date().toISOString(), bindRules: data.bindRules || [] }
+  const area = { ...data, id: nextAreaId++, status: 1, createTime: new Date().toISOString(), updateTime: new Date().toISOString() }
   mockAreas.push(area)
   return area
 }
@@ -519,10 +511,6 @@ export const getFenceRuleListMock = (params: any) => {
   const total = list.length
   const start = (page - 1) * pageSize
   return { list: list.slice(start, start + pageSize), pagination: { page, pageSize, total } }
-}
-
-export const getFenceRulesAllMock = () => {
-  return mockFenceRules.filter((r) => r.status === 1)
 }
 
 export const addFenceRuleMock = (data: any) => {
