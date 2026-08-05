@@ -7,6 +7,21 @@
 // ==================== 地图区域数据 ====================
 let mockAreas = [
   {
+    id: 5,
+    name: '厦门海域',
+    type: '重点区域',
+    geoData: {
+      type: 'Polygon',
+      coordinates: [[[118.0, 24.2], [118.8, 24.2], [118.8, 24.8], [118.0, 24.8], [118.0, 24.2]]]
+    },
+    managerId: 1,
+    managerName: '管理员',
+    remark: '厦门海域综合管控区域',
+    status: 1,
+    createTime: '2026-07-20 09:00:00',
+    updateTime: '2026-07-20 09:00:00'
+  },
+  {
     id: 1,
     name: '东海禁航区',
     type: '禁入区域',
@@ -14,8 +29,6 @@ let mockAreas = [
       type: 'Polygon',
       coordinates: [[[121.5, 29.5], [122.5, 29.5], [122.5, 30.5], [121.5, 30.5], [121.5, 29.5]]]
     },
-    startDate: '2026-01-01',
-    endDate: '2026-12-31',
     managerId: 1,
     managerName: '管理员',
     remark: '东海演习期间禁航区域',
@@ -31,8 +44,6 @@ let mockAreas = [
       type: 'Polygon',
       coordinates: [[[122.1, 29.9], [122.3, 29.9], [122.3, 30.1], [122.1, 30.1], [122.1, 29.9]]]
     },
-    startDate: '2026-03-01',
-    endDate: '2026-09-30',
     managerId: 3,
     managerName: '李四',
     remark: '港口进出船只重点监控',
@@ -48,8 +59,6 @@ let mockAreas = [
       type: 'Polygon',
       coordinates: [[[116.5, 20.5], [117.5, 20.5], [117.5, 21.5], [116.5, 21.5], [116.5, 20.5]]]
     },
-    startDate: '2026-05-01',
-    endDate: '2026-08-31',
     managerId: 4,
     managerName: '王五',
     remark: '定期巡检区域',
@@ -66,8 +75,6 @@ let mockAreas = [
       center: [119.3, 38.7],
       radius: 5000
     },
-    startDate: '2026-01-01',
-    endDate: '2026-06-30',
     managerId: 1,
     managerName: '管理员',
     remark: '石油平台周边5km警戒',
@@ -96,8 +103,8 @@ let mockApprovals: Array<{
     id: 1,
     areaId: 4,
     areaName: '渤海石油平台警戒区',
-    before: { name: '渤海石油平台警戒区', type: '重点区域', endDate: '2026-06-30' },
-    after: { name: '渤海石油平台警戒区（扩建）', type: '重点区域', endDate: '2026-12-31' },
+    before: { name: '渤海石油平台警戒区', type: '重点区域' },
+    after: { name: '渤海石油平台警戒区（扩建）', type: '重点区域' },
     submitter: '管理员',
     submitTime: '2026-07-28 09:00:00',
     reviewer: null,
@@ -130,6 +137,26 @@ let mockFenceRules = [
     createTime: '2026-06-01 10:00:00',
     updateTime: '2026-07-15 14:30:00'
   },
+  {
+    id: 2,
+    name: '厦门海域重点船舶围栏',
+    fenceType: 'polygon',
+    geoData: { type: 'Polygon', coordinates: [[[118.2,24.35],[118.6,24.35],[118.6,24.65],[118.2,24.65],[118.2,24.35]]] },
+    areaId: 5,
+    startDate: '2026-01-01',
+    endDate: '2026-12-31',
+    timeSlots: [{ start: '00:00', end: '24:00' }],
+    repeatDays: [1, 2, 3, 4, 5, 6, 7],
+    shipTypes: ['货船', '快艇'],
+    tonnageMin: 100,
+    tonnageMax: 10000,
+    sourceTypes: ['雷达', 'AIS'],
+    priority: 2,
+    alertLevel: 'important',
+    status: 1,
+    createTime: '2026-07-20 10:00:00',
+    updateTime: '2026-07-20 10:00:00'
+  }
 ]
 
 let nextFenceRuleId = 10
@@ -420,6 +447,50 @@ let nextVersionId = 10
 
 // ==================== 导出 Mock 函数 ====================
 
+// 面积计算（与前端展示口径一致，单位 km²）
+function mockPolygonAreaKm2(coordinates: number[][]): number {
+  if (coordinates.length < 3) return 0
+  const toRad = (d: number) => (d * Math.PI) / 180
+  let area = 0
+  for (let i = 0; i < coordinates.length; i++) {
+    const j = (i + 1) % coordinates.length
+    area += toRad(coordinates[j][0] - coordinates[i][0]) *
+      (2 + Math.sin(toRad(coordinates[i][1])) + Math.sin(toRad(coordinates[j][1])))
+  }
+  return Math.abs((area * 6371 * 6371) / 2)
+}
+
+function mockHaversineKm(p1: number[], p2: number[]): number {
+  const R = 6371
+  const toRad = (d: number) => (d * Math.PI) / 180
+  const dLat = toRad(p2[1] - p1[1])
+  const dLng = toRad(p2[0] - p1[0])
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(p1[1])) * Math.cos(toRad(p2[1])) * Math.sin(dLng / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
+function mockAreaText(geoData: any): string {
+  if (!geoData) return '-'
+  if (geoData.type === 'Polygon' && geoData.coordinates?.[0]?.length) {
+    let ring = geoData.coordinates[0]
+    if (ring.length > 1 && ring[0][0] === ring[ring.length - 1][0] && ring[0][1] === ring[ring.length - 1][1]) {
+      ring = ring.slice(0, -1)
+    }
+    const area = mockPolygonAreaKm2(ring)
+    return area < 0.01 ? `${(area * 1_000_000).toFixed(0)} m²` : `${area.toFixed(2)} km²`
+  }
+  if (geoData.type === 'Circle' && geoData.center) {
+    const radiusKm = geoData.radius
+      ? geoData.radius / 1000
+      : geoData.edge
+        ? mockHaversineKm(geoData.center, geoData.edge)
+        : 0
+    if (radiusKm) return `${(Math.PI * radiusKm * radiusKm).toFixed(2)} km²`
+  }
+  return '-'
+}
+
 // 地图区域
 export const getAreaListMock = (params: any) => {
   let list = [...mockAreas]
@@ -432,7 +503,12 @@ export const getAreaListMock = (params: any) => {
   const pageSize = Number(params?.pageSize) || 10
   const total = list.length
   const start = (page - 1) * pageSize
-  return { list: list.slice(start, start + pageSize), pagination: { page, pageSize, total } }
+  const listWithStats = list.slice(start, start + pageSize).map((area) => ({
+    ...area,
+    areaText: mockAreaText(area.geoData),
+    fenceCount: mockFenceRules.filter((r) => r.areaId === area.id).length
+  }))
+  return { list: listWithStats, pagination: { page, pageSize, total } }
 }
 
 export const addAreaMock = (data: any) => {
@@ -450,8 +526,8 @@ export const updateAreaMock = (id: number, data: any) => {
     id: nextApprovalId++,
     areaId: id,
     areaName: old.name,
-    before: { name: old.name, type: old.type, endDate: old.endDate },
-    after: { name: data.name || old.name, type: data.type || old.type, endDate: data.endDate || old.endDate },
+    before: { name: old.name, type: old.type },
+    after: { name: data.name || old.name, type: data.type || old.type },
     submitter: '管理员',
     submitTime: new Date().toISOString(),
     reviewer: null,
@@ -493,7 +569,6 @@ export const approveMock = (id: number, result: string) => {
       area.status = 1
       area.name = item.before.name
       area.type = item.before.type
-      area.endDate = item.before.endDate
     }
   }
   return item
@@ -503,6 +578,7 @@ export const approveMock = (id: number, result: string) => {
 export const getFenceRuleListMock = (params: any) => {
   let list = [...mockFenceRules]
   if (params?.name) list = list.filter((r) => r.name.includes(params.name))
+  if (params?.areaId) list = list.filter((r) => r.areaId === Number(params.areaId))
   if (params?.status !== undefined && params?.status !== '') {
     list = list.filter((r) => r.status === Number(params.status))
   }
@@ -510,7 +586,12 @@ export const getFenceRuleListMock = (params: any) => {
   const pageSize = Number(params?.pageSize) || 10
   const total = list.length
   const start = (page - 1) * pageSize
-  return { list: list.slice(start, start + pageSize), pagination: { page, pageSize, total } }
+  const areaNameMap = new Map(mockAreas.map((a) => [a.id, a.name]))
+  const listWithArea = list.slice(start, start + pageSize).map((rule) => ({
+    ...rule,
+    areaName: areaNameMap.get(rule.areaId) || '-'
+  }))
+  return { list: listWithArea, pagination: { page, pageSize, total } }
 }
 
 export const addFenceRuleMock = (data: any) => {

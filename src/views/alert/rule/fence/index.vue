@@ -6,6 +6,11 @@
         <ElFormItem label="规则名称">
           <ElInput v-model="filterForm.name" placeholder="输入规则名称" clearable />
         </ElFormItem>
+        <ElFormItem label="所属区域">
+          <ElSelect v-model="filterForm.areaId" placeholder="全部" clearable>
+            <ElOption v-for="a in areaOptions" :key="a.id" :label="a.name" :value="a.id" />
+          </ElSelect>
+        </ElFormItem>
         <ElFormItem label="状态">
           <ElSelect v-model="filterForm.status" placeholder="全部" clearable>
             <ElOption label="启用" :value="1" />
@@ -26,6 +31,9 @@
       </div>
       <ElTable v-loading="loading" :data="tableData" row-key="id" class="fence-table">
         <ElTableColumn prop="name" label="规则名称" min-width="160" />
+        <ElTableColumn label="所属区域" width="150" align="center">
+          <template #default="{ row }">{{ row.areaName || '-' }}</template>
+        </ElTableColumn>
         <ElTableColumn label="围栏面积" width="120" align="center" class-name="annot-alert-rule-fence-area-col">
           <template #default="{ row }">{{ formatArea(row.geoData) }}</template>
         </ElTableColumn>
@@ -89,6 +97,12 @@
       <ElForm ref="formRef" :model="form" :rules="formRules" label-width="110px">
         <ElFormItem label="规则名称" prop="name">
           <ElInput v-model="form.name" placeholder="2-50字" maxlength="50" />
+        </ElFormItem>
+
+        <ElFormItem label="所属区域" prop="areaId">
+          <ElSelect v-model="form.areaId" placeholder="请选择所属区域" filterable :loading="areaLoading">
+            <ElOption v-for="a in areaOptions" :key="a.id" :label="areaOptionLabel(a)" :value="a.id" />
+          </ElSelect>
         </ElFormItem>
 
         <!-- 围栏区域绘制 -->
@@ -198,6 +212,7 @@
     >
       <div class="draw-map-toolbar">
         <div class="toolbar-left">
+          <span v-if="selectedAreaName" class="area-boundary-label">所属区域：{{ selectedAreaName }}</span>
           <ElButton size="small" :disabled="drawPoints.length === 0" @click="undoLastPoint">撤销</ElButton>
           <ElButton size="small" :disabled="drawPoints.length === 0" @click="clearDrawing">清除</ElButton>
           <span v-if="drawPolygonArea > 0" class="draw-area-label">面积：{{ drawPolygonArea.toFixed(2) }} km²</span>
@@ -230,19 +245,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, nextTick, watch } from 'vue'
+import { ref, reactive, computed, onMounted, nextTick, watch } from 'vue'
 import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from 'element-plus'
 import { Search, Plus, Delete, Edit } from '@element-plus/icons-vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import {
+  getAreaList,
   getFenceRuleList,
   addFenceRule,
   updateFenceRule,
   deleteFenceRule,
   updateFenceRuleStatus,
+  getAlertEventList,
 } from '@/api/alert'
-import { getAlertEventList } from '@/api/alert'
 
 defineOptions({ name: 'AlertRuleFence' })
 
@@ -262,10 +278,14 @@ const sourceTypeOptions = ['雷达', 'AIS', '北斗', '光电', '融合']
 const tileUrl = 'https://t{s}.tianditu.gov.cn/vec_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=5f23a6c8375bf184bbd6f8fa9d552029'
 
 // ---- 表格筛选 ----
-const filterForm = reactive({ name: '', status: '' as number | string })
+const filterForm = reactive({ name: '', areaId: '' as number | string, status: '' as number | string })
 const loading = ref(false)
 const tableData = ref<any[]>([])
 const pagination = reactive({ page: 1, pageSize: 10, total: 0 })
+
+// ---- 所属区域选项 ----
+const areaOptions = ref<any[]>([])
+const areaLoading = ref(false)
 
 // ---- 编辑弹窗 ----
 const dialogVisible = ref(false)
@@ -273,8 +293,10 @@ const isEditing = ref(false)
 const editingId = ref<number | null>(null)
 const submitLoading = ref(false)
 const formRef = ref<FormInstance>()
+let syncingAreaId = false
 const form = reactive<any>({
   name: '',
+  areaId: undefined as number | undefined,
   geoData: null as any,
   dateRange: [] as string[],
   timeSlots: [['08:00', '18:00']] as string[][],
@@ -287,6 +309,9 @@ const form = reactive<any>({
   alertLevel: 'normal',
 })
 
+const selectedArea = computed(() => areaOptions.value.find((a) => a.id === form.areaId))
+const selectedAreaName = computed(() => selectedArea.value?.name || '')
+
 const validateGeoData = (_rule: any, _value: any, callback: any) => {
   if (!form.geoData) callback(new Error('请绘制围栏区域'))
   else callback()
@@ -294,6 +319,7 @@ const validateGeoData = (_rule: any, _value: any, callback: any) => {
 
 const formRules: FormRules = {
   name: [{ required: true, message: '请输入规则名称', trigger: 'blur' }],
+  areaId: [{ required: true, message: '请选择所属区域', trigger: 'change' }],
   geoData: [{ required: true, validator: validateGeoData, trigger: 'change' }],
   alertLevel: [{ required: true, message: '请选择告警级别', trigger: 'change' }],
 }
@@ -377,12 +403,27 @@ function formatShipTypes(row: any) {
   return parts.filter(Boolean).join(' ')
 }
 
+function areaOptionLabel(area: any) {
+  return area.areaText ? `${area.name}（${area.areaText}）` : area.name
+}
+
+async function loadAreaOptions() {
+  areaLoading.value = true
+  try {
+    const { data } = await getAreaList({ page: 1, pageSize: 1000 })
+    areaOptions.value = (data as any)?.list || []
+  } finally {
+    areaLoading.value = false
+  }
+}
+
 // ========== 列表加载 ==========
 async function loadList() {
   loading.value = true
   try {
     const { data } = await getFenceRuleList({
       name: filterForm.name,
+      areaId: filterForm.areaId === '' ? undefined : filterForm.areaId,
       status: filterForm.status === '' ? undefined : filterForm.status,
       page: pagination.page,
       pageSize: pagination.pageSize,
@@ -395,23 +436,27 @@ async function loadList() {
 }
 
 function handleSearch() { pagination.page = 1; loadList() }
-function handleReset() { filterForm.name = ''; filterForm.status = ''; pagination.page = 1; loadList() }
+function handleReset() { filterForm.name = ''; filterForm.areaId = ''; filterForm.status = ''; pagination.page = 1; loadList() }
 
 // ========== 编辑弹窗 ==========
 function openAddDialog() {
   isEditing.value = false; editingId.value = null
-  form.name = ''; form.geoData = null
+  form.name = ''; form.areaId = undefined; form.geoData = null
   form.dateRange = []; form.timeSlots = [['08:00', '18:00']]
   form.repeatDays = [1, 2, 3, 4, 5]; form.shipTypes = []
   form.tonnageMin = 0; form.tonnageMax = 50000; form.sourceTypes = []
   form.priority = 1; form.alertLevel = 'normal'
   destroyMiniMap()
+  loadAreaOptions()
   dialogVisible.value = true
 }
 
 function openEditDialog(row: any) {
   isEditing.value = true; editingId.value = row.id
+  syncingAreaId = true
+  loadAreaOptions()
   form.name = row.name
+  form.areaId = row.areaId
   form.geoData = row.geoData ? JSON.parse(JSON.stringify(row.geoData)) : null
   form.dateRange = [row.startDate, row.endDate]
   form.timeSlots = (row.timeSlots || [{ start: '08:00', end: '18:00' }]).map((s: any) => [s.start, s.end])
@@ -422,11 +467,22 @@ function openEditDialog(row: any) {
   form.priority = row.priority ?? 1; form.alertLevel = row.alertLevel || 'normal'
   destroyMiniMap()
   dialogVisible.value = true
-  nextTick(() => renderMiniMap())
+  nextTick(() => {
+    syncingAreaId = false
+    renderMiniMap()
+  })
 }
 
 watch(dialogVisible, (val) => {
   if (!val) destroyMiniMap()
+})
+
+watch(() => form.areaId, () => {
+  if (syncingAreaId) return
+  if (form.geoData) {
+    form.geoData = null
+    destroyMiniMap()
+  }
 })
 
 // ========== 小地图预览 ==========
@@ -489,6 +545,10 @@ function fitMapToGeoData(map: L.Map, gd: any) {
 
 // ========== 绘制弹窗 ==========
 function openDrawDialog() {
+  if (!form.areaId) {
+    ElMessage.warning('请先选择所属区域')
+    return
+  }
   drawDialogVisible.value = true
   drawPoints.value = []
   drawPolygonArea.value = 0
@@ -503,6 +563,7 @@ function initDrawMap() {
 
   drawMap = L.map(drawMapContainer.value).setView([30.0, 122.0], 7)
   L.tileLayer(tileUrl, { maxZoom: 18, subdomains: ['0','1','2','3','4','5','6','7'] }).addTo(drawMap)
+  addAreaBoundaryLayer()
   drawFeatureGroup = L.featureGroup().addTo(drawMap)
 
   // 编辑模式：回显已有区域
@@ -519,12 +580,53 @@ function initDrawMap() {
       drawPolygonArea.value = polygonAreaKm2(drawPoints.value)
       fitDrawMapBounds()
     }
+  } else {
+    fitDrawMapToArea()
   }
 
   // 点击绘制
   drawMap.on('click', onDrawMapClick)
   drawMap.on('dblclick', onDrawMapDblClick)
   setTimeout(() => drawMap?.invalidateSize(), 100)
+}
+
+function addAreaBoundaryLayer() {
+  if (!drawMap || !selectedArea.value?.geoData) return
+  const gd = selectedArea.value.geoData
+  const style = {
+    style: {
+      color: '#f59e0b',
+      weight: 2,
+      dashArray: '8 6',
+      fillColor: '#f59e0b',
+      fillOpacity: 0.05,
+    },
+  }
+  if (gd.type === 'Circle' && gd.center && gd.edge) {
+    const center = L.latLng(gd.center[1], gd.center[0])
+    const edge = L.latLng(gd.edge[1], gd.edge[0])
+    L.circle(center, {
+      radius: haversineKm(center, edge) * 1000,
+      color: '#f59e0b',
+      weight: 2,
+      dashArray: '8 6',
+      fillColor: '#f59e0b',
+      fillOpacity: 0.05,
+    }).bindTooltip(selectedArea.value.name, { sticky: true }).addTo(drawMap)
+  } else if (gd.type === 'Polygon') {
+    L.geoJSON(gd, style).bindTooltip(selectedArea.value.name, { sticky: true }).addTo(drawMap)
+  }
+}
+
+function fitDrawMapToArea() {
+  const gd = selectedArea.value?.geoData
+  if (!drawMap || !gd) return
+  if (gd.type === 'Circle' && gd.center) {
+    drawMap.setView([gd.center[1], gd.center[0]], 12)
+    return
+  }
+  const boundsLayer = L.geoJSON(gd)
+  drawMap.fitBounds(boundsLayer.getBounds(), { padding: [40, 40] })
 }
 
 function onDrawMapClick(e: L.LeafletMouseEvent) {
@@ -641,6 +743,7 @@ async function handleSubmit() {
   try {
     const data = {
       name: form.name,
+      areaId: form.areaId,
       geoData: form.geoData,
       startDate: form.dateRange?.[0] || '',
       endDate: form.dateRange?.[1] || '',
@@ -699,7 +802,10 @@ async function showHitHistory(row: any) {
 
 function resetForm() { formRef.value?.resetFields() }
 
-onMounted(() => { loadList() })
+onMounted(() => {
+  loadList()
+  loadAreaOptions()
+})
 </script>
 
 <style lang="scss" scoped>
@@ -771,6 +877,15 @@ onMounted(() => { loadList() })
   font-weight: 600;
   padding: 2px 10px;
   background: var(--el-color-primary-light-9);
+  border-radius: 4px;
+}
+
+.area-boundary-label {
+  font-size: 13px;
+  color: #b45309;
+  font-weight: 600;
+  padding: 2px 10px;
+  background: #fef3c7;
   border-radius: 4px;
 }
 

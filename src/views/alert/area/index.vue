@@ -42,8 +42,11 @@
             <ElTag :type="typeTagMap[row.type]" size="small" disable-transitions>{{ row.type }}</ElTag>
           </template>
         </ElTableColumn>
-        <ElTableColumn label="有效期" min-width="200">
-          <template #default="{ row }">{{ row.startDate || '-' }} 至 {{ row.endDate || '-' }}</template>
+        <ElTableColumn label="面积" min-width="120" align="center">
+          <template #default="{ row }">{{ row.areaText || formatGeoInfo(row.geoData) }}</template>
+        </ElTableColumn>
+        <ElTableColumn label="电子围栏数量" width="120" align="center">
+          <template #default="{ row }">{{ row.fenceCount ?? 0 }}</template>
         </ElTableColumn>
         <ElTableColumn label="状态" width="90" align="center">
           <template #default="{ row }">
@@ -89,17 +92,6 @@
             <ElOption label="禁入区域" value="禁入区域" />
             <ElOption label="巡检区域" value="巡检区域" />
           </ElSelect>
-        </ElFormItem>
-        <ElFormItem label="有效期" prop="dateRange">
-          <ElDatePicker
-            v-model="form.dateRange"
-            type="daterange"
-            range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            value-format="YYYY-MM-DD"
-            class="w-full annot-alert-area-form-date"
-          />
         </ElFormItem>
         <ElFormItem label="负责人">
           <ElInput v-model="form.managerName" placeholder="选填" class="annot-alert-area-form-manager" />
@@ -229,7 +221,7 @@ const editingId = ref<number | null>(null)
 const submitLoading = ref(false)
 const formRef = ref<FormInstance>()
 const form = reactive<any>({
-  name: '', type: '重点区域', dateRange: [] as string[],
+  name: '', type: '重点区域',
   managerName: '', remark: '', geoData: null as any,
 })
 
@@ -241,7 +233,6 @@ const validateGeoData = (_rule: any, _value: any, callback: any) => {
 const formRules: FormRules = {
   name: [{ required: true, message: '请输入区域名称', trigger: 'blur' }, { min: 2, max: 50, message: '2-50字', trigger: 'blur' }],
   type: [{ required: true, message: '请选择区域类型', trigger: 'change' }],
-  dateRange: [{ required: true, message: '请选择有效期', trigger: 'change' }],
   geoData: [{ required: true, validator: validateGeoData, trigger: 'change' }],
 }
 
@@ -318,7 +309,7 @@ function handleReset() { filterForm.name = ''; filterForm.type = ''; filterForm.
 // ========== 编辑弹窗 ==========
 function handleAdd() {
   isEditing.value = false; editingId.value = null
-  form.name = ''; form.type = '重点区域'; form.dateRange = []
+  form.name = ''; form.type = '重点区域'
   form.managerName = ''; form.remark = ''; form.geoData = null
   destroyMiniMap()
   dialogVisible.value = true
@@ -327,7 +318,6 @@ function handleAdd() {
 function handleEdit(row: any) {
   isEditing.value = true; editingId.value = row.id
   form.name = row.name; form.type = row.type
-  form.dateRange = [row.startDate, row.endDate]
   form.managerName = row.managerName || ''; form.remark = row.remark || ''
   form.geoData = row.geoData ? JSON.parse(JSON.stringify(row.geoData)) : null
   destroyMiniMap()
@@ -640,7 +630,6 @@ async function handleSubmit() {
   try {
     const data: any = {
       name: form.name, type: form.type,
-      startDate: form.dateRange[0], endDate: form.dateRange[1],
       managerName: form.managerName, remark: form.remark,
       geoData: form.geoData,
     }
@@ -658,6 +647,10 @@ async function handleSubmit() {
 
 // ========== 删除 / 审批 ==========
 async function handleDelete(row: any) {
+  if (row.fenceCount > 0) {
+    ElMessage.warning('请先删除该区域下的电子围栏')
+    return
+  }
   try {
     await ElMessageBox.confirm('确定删除该区域吗？删除后不可恢复。', '确认删除', { type: 'warning' })
     await deleteArea(row.id)
