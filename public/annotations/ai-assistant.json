@@ -1,0 +1,107 @@
+{
+  "page": "ai-assistant",
+  "title": "AI智能研判-AI助手",
+  "updatedAt": "2026-08-06",
+  "annotations": [
+    {
+      "id": "annot-ai-assistant-recommend",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-recommend",
+      "position": { "x": 0, "y": 0 },
+      "title": "推荐问题",
+      "content": "对话起始区展示推荐问题快捷入口，点击后自动发送对应问题，无需二次确认。\n推荐问题覆盖目标查询、告警查询、区域查询、操作指引与辅助研判示例，便于新用户快速上手。",
+      "category": "action",
+      "source": "SRS 3.5.2 AI助手 - 推荐问题",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-chat",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-chat",
+      "position": { "x": 0, "y": 0 },
+      "title": "多轮对话",
+      "content": "历史消息按时间顺序分区展示，支持多轮对话理解上下文。\n用户可基于上下文继续追问，AI 回复下方直接呈现地图、列表、统计图表等结构化结果。",
+      "category": "field",
+      "source": "SRS 3.5.2 AI助手 - 多轮对话/意图识别",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-input",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-input",
+      "position": { "x": 0, "y": 0 },
+      "title": "问题输入与发送",
+      "content": "支持自然语言输入，单次输入 1-500 字，发送后展示用户消息与 AI 响应。\n输入为空时提示“请输入问题”，发送过程中按钮进入加载状态防止重复提交。",
+      "category": "action",
+      "source": "SRS 3.5.2 AI助手 - 消息发送",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-result-target",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-result-target",
+      "position": { "x": 0, "y": 0 },
+      "title": "目标查询结果",
+      "content": "目标查询结果以地图点位与目标列表综合呈现：\n- 地图：展示目标位置点位\n- 列表：目标名称、状态、数据来源\n点击列表“定位”可聚焦对应地图点位，地图与列表联动。",
+      "category": "field",
+      "source": "SRS 3.5.2 AI助手 - 目标查询",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-result-alarm",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-result-alarm",
+      "position": { "x": 0, "y": 0 },
+      "title": "告警查询结果",
+      "content": "告警查询结果包含告警列表与等级分布：\n- 列表：告警编号、类型、等级、发生时间、处置状态\n- 等级分布：快速查看紧急/重要/一般/提示数量，判断当前风险面。",
+      "category": "field",
+      "source": "SRS 3.5.2 AI助手 - 告警查询",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-result-area",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-result-area",
+      "position": { "x": 0, "y": 0 },
+      "title": "区域查询结果",
+      "content": "区域查询结果以地图高亮区域与区域列表综合呈现：\n- 列表：区域名称、区域编码、管控状态\n点击列表“定位”可联动地图聚焦匹配区域。",
+      "category": "field",
+      "source": "SRS 3.5.2 AI助手 - 区域查询",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-result-guide",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-result-guide",
+      "position": { "x": 0, "y": 0 },
+      "title": "操作指引",
+      "content": "按步骤顺序展示操作指引，支持点击“进入对应功能页面”快捷跳转。\n面向新用户提供查询操作说明与功能指引，辅助快速上手系统。",
+      "category": "action",
+      "source": "SRS 3.5.2 AI助手 - 操作指引",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-result-assist",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-result-assist",
+      "position": { "x": 0, "y": 0 },
+      "title": "辅助研判",
+      "content": "基于多源数据自动生成事件研判结论，展示事件摘要、AI结论、数据来源与按优先级排序的处置建议，每条结论标注数据来源可追溯。\n支持对误报或漏报提交反馈，进入反馈弹窗。",
+      "category": "field",
+      "source": "SRS 3.5.2 AI助手 - 辅助研判/反馈",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-assistant-feedback-dialog",
+      "type": "selector",
+      "selector": ".annot-ai-assistant-feedback-dialog",
+      "position": { "x": 0, "y": 0 },
+      "title": "误报/漏报反馈",
+      "content": "反馈类型支持误报/漏报，反馈原因支持多选（天气干扰/算法误判/参数不当/其他），样本说明选填。\n提交后反馈记录进入误报治理，用于持续优化算法效果。",
+      "category": "action",
+      "source": "SRS 3.5.2 AI助手 - 反馈",
+      "container": "modal",
+      "createdAt": "2026-08-06"
+    }
+  ]
+}

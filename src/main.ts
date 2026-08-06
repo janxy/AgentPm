@@ -14,20 +14,24 @@ import '@icons/system/iconfont.css'                 // 系统图标
 import { setupGlobDirectives } from './directives'
 import { setupErrorHandle } from './utils/sys/error-handle'
 
-if (import.meta.env.VITE_USE_MOCK === 'true') {
-  import('./mock')
-}
-
 document.addEventListener(
   'touchstart',
   function () {},
   { passive: false }
 )
 
-const app = createApp(App)
-initStore(app)
-initRouter(app)
-setupGlobDirectives(app)
-setupErrorHandle(app)
+async function bootstrap() {
+  if (import.meta.env.VITE_USE_MOCK === 'true') {
+    await import('./mock')
+  }
 
-app.mount('#app')
+  const app = createApp(App)
+  initStore(app)
+  initRouter(app)
+  setupGlobDirectives(app)
+  setupErrorHandle(app)
+
+  app.mount('#app')
+}
+
+bootstrap()

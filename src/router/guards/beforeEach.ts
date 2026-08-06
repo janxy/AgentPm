@@ -175,8 +175,24 @@ async function handleRouteGuard(
 
     // 设置菜单数据（从已注册的路由构建，确保路径完整）
     const menuStore = useMenuStore()
-    const menuTree = buildMenuTreeFromRoutes(router)
+    let menuTree = buildMenuTreeFromRoutes(router)
+
+    // Mock 模式同样按角色裁剪菜单，保证角色演示与真实系统一致
+    const userRoles = userStore.info.userRoles
+    const roles = userRoles?.map((ur: { role: { id: number; name: string; label: string | null } }) => ur.role.name) ?? []
+    menuTree = filterMenuByRoles(menuTree, roles).filter((item) => !item.children || item.children.length > 0)
     menuStore.setMenuList(menuTree)
+  }
+
+  // Mock 模式访问控制：按路由 meta.roles 拦截无权限页面
+  const routeRoles = to.meta.roles as string[] | undefined
+  if (USE_MOCK && routeRoles && routeRoles.length > 0) {
+    const userRoles = userStore.info.userRoles
+    const roles = userRoles?.map((ur: { role: { id: number; name: string; label: string | null } }) => ur.role.name) ?? []
+    if (roles.length > 0 && !routeRoles.some((role) => roles.includes(role))) {
+      next({ name: 'Exception403' })
+      return
+    }
   }
 
   // 处理动态路由注册（Mock 模式下跳过）

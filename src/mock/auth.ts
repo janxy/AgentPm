@@ -60,6 +60,12 @@ export const MOCK_USERS = [
           isSystem: 1
         }
       ],
+      userRoles: [
+        { role: { id: 11, name: '值班员', label: null } },
+        { role: { id: 12, name: '指挥员', label: null } },
+        { role: { id: 13, name: '设备操作员', label: null } },
+        { role: { id: 14, name: '运维管理员', label: null } }
+      ],
       buttons: [
         'user:add',
         'user:edit',
@@ -67,7 +73,13 @@ export const MOCK_USERS = [
         'role:add',
         'role:edit',
         'role:delete',
-        'externalCandidate:manage'
+        'externalCandidate:manage',
+        'ai:service:view',
+        'ai:service:restart',
+        'ai:ship:review',
+        'ai:behavior:config',
+        'ai:assistant:chat',
+        'ai:mifa:control'
       ]
     }
   },
@@ -124,7 +136,183 @@ export const MOCK_USERS = [
           isSystem: 0
         }
       ],
+      userRoles: [{ role: { id: 4, name: '普通用户', label: null } }],
       buttons: ['user:view']
+    }
+  },
+  {
+    username: 'duty',
+    password: '123456',
+    userInfo: {
+      id: 11,
+      username: 'duty',
+      nickname: '值班员',
+      email: 'duty@example.com',
+      phone: '13800138011',
+      avatar: avatar1,
+      status: 1,
+      remark: 'AI智能研判值班员',
+      departmentId: 4,
+      department: {
+        id: 4,
+        departmentName: '指挥中心',
+        departmentCode: 'CMD_CENTER',
+        parentId: null,
+        type: 'department',
+        companyId: 1,
+        status: 1,
+        sort: 4,
+        managerId: 11,
+        managerName: '值班员',
+        phone: '13800138011',
+        email: 'duty@example.com'
+      },
+      roles: [
+        {
+          id: 11,
+          name: '值班员',
+          code: 'R_DUTY',
+          description: '日常值班监控人员',
+          status: 1,
+          sort: 4,
+          isSystem: 0
+        }
+      ],
+      userRoles: [{ role: { id: 11, name: '值班员', label: null } }],
+      buttons: ['ai:service:view', 'ai:ship:review', 'ai:behavior:view', 'ai:assistant:chat']
+    }
+  },
+  {
+    username: 'commander',
+    password: '123456',
+    userInfo: {
+      id: 12,
+      username: 'commander',
+      nickname: '指挥员',
+      email: 'commander@example.com',
+      phone: '13800138012',
+      avatar: avatar1,
+      status: 1,
+      remark: 'AI智能研判指挥员',
+      departmentId: 5,
+      department: {
+        id: 5,
+        departmentName: '指挥中心',
+        departmentCode: 'CMD_CENTER',
+        parentId: null,
+        type: 'department',
+        companyId: 1,
+        status: 1,
+        sort: 5,
+        managerId: 12,
+        managerName: '指挥员',
+        phone: '13800138012',
+        email: 'commander@example.com'
+      },
+      roles: [
+        {
+          id: 12,
+          name: '指挥员',
+          code: 'R_COMMANDER',
+          description: '研判决策指挥人员',
+          status: 1,
+          sort: 5,
+          isSystem: 0
+        }
+      ],
+      userRoles: [{ role: { id: 12, name: '指挥员', label: null } }],
+      buttons: [
+        'ai:service:view',
+        'ai:service:restart',
+        'ai:ship:review',
+        'ai:behavior:config',
+        'ai:assistant:chat',
+        'ai:mifa:control'
+      ]
+    }
+  },
+  {
+    username: 'operator',
+    password: '123456',
+    userInfo: {
+      id: 13,
+      username: 'operator',
+      nickname: '设备操作员',
+      email: 'operator@example.com',
+      phone: '13800138013',
+      avatar: avatar1,
+      status: 1,
+      remark: 'AI智能研判设备操作员',
+      departmentId: 6,
+      department: {
+        id: 6,
+        departmentName: '装备保障部',
+        departmentCode: 'EQUIPMENT',
+        parentId: null,
+        type: 'department',
+        companyId: 1,
+        status: 1,
+        sort: 6,
+        managerId: 13,
+        managerName: '设备操作员',
+        phone: '13800138013',
+        email: 'operator@example.com'
+      },
+      roles: [
+        {
+          id: 13,
+          name: '设备操作员',
+          code: 'R_OPERATOR',
+          description: '设备操作与联动执行人员',
+          status: 1,
+          sort: 6,
+          isSystem: 0
+        }
+      ],
+      userRoles: [{ role: { id: 13, name: '设备操作员', label: null } }],
+      buttons: ['ai:assistant:chat', 'ai:mifa:link']
+    }
+  },
+  {
+    username: 'maintainer',
+    password: '123456',
+    userInfo: {
+      id: 14,
+      username: 'maintainer',
+      nickname: '运维管理员',
+      email: 'maintainer@example.com',
+      phone: '13800138014',
+      avatar: avatar1,
+      status: 1,
+      remark: 'AI算法服务运维管理员',
+      departmentId: 7,
+      department: {
+        id: 7,
+        departmentName: '技术保障部',
+        departmentCode: 'TECH_SUPPORT',
+        parentId: null,
+        type: 'department',
+        companyId: 1,
+        status: 1,
+        sort: 7,
+        managerId: 14,
+        managerName: '运维管理员',
+        phone: '13800138014',
+        email: 'maintainer@example.com'
+      },
+      roles: [
+        {
+          id: 14,
+          name: '运维管理员',
+          code: 'R_MAINTAINER',
+          description: '算法服务与系统运维人员',
+          status: 1,
+          sort: 7,
+          isSystem: 0
+        }
+      ],
+      userRoles: [{ role: { id: 14, name: '运维管理员', label: null } }],
+      buttons: ['ai:service:view', 'ai:service:restart', 'ai:mifa:reset']
     }
   }
 ]

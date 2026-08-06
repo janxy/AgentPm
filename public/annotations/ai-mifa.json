@@ -1,0 +1,106 @@
+{
+  "page": "ai-mifa",
+  "title": "AI智能研判-多源融合智能体",
+  "updatedAt": "2026-08-06",
+  "annotations": [
+    {
+      "id": "annot-ai-mifa-orbit",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-orbit",
+      "position": { "x": 0, "y": 0 },
+      "title": "MIFA四层闭环架构",
+      "content": "闭环中枢按“感知-融合-推理-联动”四层闭环架构运行。\n- 感知层：接入多源异构数据并执行时空对齐与格式标准化\n- 融合层：目标匹配与身份确认\n- 推理层：交叉识别单源无法发现的异常模式\n- 联动层：自动调度设备执行核验与处置\n中心状态在“自动闭环中”与“等待人工确认”之间切换。",
+      "category": "display",
+      "source": "SRS 3.5.3 多源融合智能体 - 四层闭环架构",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-metrics",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-metrics",
+      "position": { "x": 0, "y": 0 },
+      "title": "融合研判工作台指标",
+      "content": "融合研判工作台汇总四层关键指标：数据源在线、融合待确认、高严重度、联动执行中。\n进入页面后优先查看该区域，即可判断当前闭环是否顺畅、是否存在待人工处理事项。",
+      "category": "display",
+      "source": "SRS 3.5.3 多源融合智能体 - 感知/融合/推理/联动状态",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-pending",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-pending",
+      "position": { "x": 0, "y": 0 },
+      "title": "融合待确认",
+      "content": "融合层匹配结果为“待确认”的目标集中在此等待人工确认，点击确认完成身份确认后进入执行队列。\n无待确认时以灰色占位展示，不用打钩代替状态。",
+      "category": "action",
+      "source": "SRS 3.5.3 多源融合智能体 - 融合层目标确认",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-loop",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-loop",
+      "position": { "x": 0, "y": 0 },
+      "title": "最近闭环",
+      "content": "展示最近一次成功完成的联动动作与目标设备，便于快速追溯最近一次完整闭环结果。",
+      "category": "display",
+      "source": "SRS 3.5.3 多源融合智能体 - 完整智能闭环",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-exec-queue",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-exec-queue",
+      "position": { "x": 0, "y": 0 },
+      "title": "执行队列",
+      "content": "执行队列默认展示，无任务时显示“暂无进行中任务”。\n有任务时按“融合确认-推理识别-联动调度”顺序推进，并通过进度条与阶段高亮展示当前进展；任务完成后自动移出队列，多条任务可同时并行展示。",
+      "category": "display",
+      "source": "SRS 3.5.3 多源融合智能体 - 感知-融合-推理-联动闭环",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-layer-perception",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-layer-perception",
+      "position": { "x": 0, "y": 0 },
+      "title": "感知层",
+      "content": "感知层接入雷达、AIS、北斗、光电、频谱、气象等多源异构数据，展示接入状态、实时数据量、时空对齐成功率、格式标准化与最近更新时间。\n对应需求中“感知层接入多源异构数据执行时空对齐与格式标准化”。",
+      "category": "field",
+      "source": "SRS 3.5.3 多源融合智能体 - 感知层状态",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-layer-fusion",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-layer-fusion",
+      "position": { "x": 0, "y": 0 },
+      "title": "融合层",
+      "content": "融合层进行多源目标匹配与身份确认，展示目标名称、数据源组合、匹配结果（已确认/待确认/已分离）与最近位置。\n匹配结果为“待确认”的目标需人工确认身份，确认后更新为“已确认”。",
+      "category": "action",
+      "source": "SRS 3.5.3 多源融合智能体 - 融合层目标",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-layer-inference",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-layer-inference",
+      "position": { "x": 0, "y": 0 },
+      "title": "推理层",
+      "content": "推理层交叉识别单源无法发现的异常模式，展示推理时间、目标、异常类型、交叉依据、严重程度与影响范围。\n高严重度结果单独计数，便于优先处置。",
+      "category": "field",
+      "source": "SRS 3.5.3 多源融合智能体 - 推理层结果",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "annot-ai-mifa-layer-linkage",
+      "type": "selector",
+      "selector": ".annot-ai-mifa-layer-linkage",
+      "position": { "x": 0, "y": 0 },
+      "title": "联动层",
+      "content": "联动层自动调度设备执行核验与处置，展示联动动作、目标设备、触发来源、执行状态、执行结果与执行时间。\n执行状态包含待执行、执行中、成功、失败，形成完整智能闭环。",
+      "category": "field",
+      "source": "SRS 3.5.3 多源融合智能体 - 联动层执行",
+      "createdAt": "2026-08-06"
+    }
+  ]
+}

@@ -172,11 +172,30 @@
     }
   }
 
-  .default-account {
+  .demo-accounts {
     margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: center;
+  }
+
+  .demo-account-label {
+    display: block;
     font-size: 12px;
     color: #c0c4cc;
-    text-align: center;
+  }
+
+  .demo-account-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 10px;
+    margin-top: 6px;
+
+    :deep(.el-button) {
+      font-size: 12px;
+      color: #8ab4f8;
+    }
   }
 }
 

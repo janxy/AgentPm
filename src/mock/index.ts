@@ -251,3 +251,50 @@ mockRoute('GET', '/admin/device/radar/station/list', () => getRadarStationListMo
 mockRoute('GET', '/admin/device/radar/station/detail/:id', ({ url }) => getRadarStationDetailMock(extractId(url)))
 mockRoute('GET', '/admin/device/radar/target/list', ({ params }) => getRadarTargetListMock(params?.stationId))
 mockRoute('PUT', '/admin/device/radar/station/params/:id', ({ url, data }) => updateRadarStationParamsMock(extractId(url), data))
+
+// ==================== AI智能研判（模拟AI引擎） ====================
+import {
+  getAiEngineOverviewMock,
+  getAlgorithmServiceListMock,
+  getAlgorithmServiceDetailMock,
+  updateAlgorithmServiceConfigMock,
+  restartAlgorithmServiceMock,
+  switchAlgorithmVersionMock,
+  getShipDevicesMock,
+  getShipRecognitionListMock,
+  getShipRecognitionDetailMock,
+  reviewShipRecognitionMock,
+  getBehaviorAnalysisListMock,
+  getAssistantMock,
+  sendAssistantMessageMock,
+  submitAssistantFeedbackMock,
+  getAssistantFeedbackListMock,
+  getMifaPipelineMock,
+  setMifaRunningMock,
+  confirmMifaTargetMock,
+  retryMifaLinkMock
+} from './ai'
+
+mockRoute('GET', '/admin/ai/engine/overview', () => getAiEngineOverviewMock())
+mockRoute('GET', '/admin/ai/algorithm/list', ({ params }) => getAlgorithmServiceListMock(params))
+mockRoute('GET', '/admin/ai/algorithm/detail/:id', ({ url }) => getAlgorithmServiceDetailMock(extractId(url)))
+mockRoute('POST', '/admin/ai/algorithm/config/:id', ({ url, data }) =>
+  updateAlgorithmServiceConfigMock(extractId(url), data)
+)
+mockRoute('POST', '/admin/ai/algorithm/restart/:id', ({ url }) => restartAlgorithmServiceMock(extractId(url)))
+mockRoute('POST', '/admin/ai/algorithm/version/:id', ({ url, data }) =>
+  switchAlgorithmVersionMock(extractId(url), data?.version)
+)
+mockRoute('GET', '/admin/ai/ship/list', ({ params }) => getShipRecognitionListMock(params))
+mockRoute('GET', '/admin/ai/ship/devices', () => getShipDevicesMock())
+mockRoute('GET', '/admin/ai/ship/detail/:id', ({ url }) => getShipRecognitionDetailMock(extractId(url)))
+mockRoute('POST', '/admin/ai/ship/review/:id', ({ url, data }) => reviewShipRecognitionMock(extractId(url), data))
+mockRoute('GET', '/admin/ai/behavior/list', ({ params }) => getBehaviorAnalysisListMock(params))
+mockRoute('GET', '/admin/ai/assistant/session', () => getAssistantMock())
+mockRoute('POST', '/admin/ai/assistant/send', ({ data }) => sendAssistantMessageMock(data?.content))
+mockRoute('POST', '/admin/ai/assistant/feedback', ({ data }) => submitAssistantFeedbackMock(data))
+mockRoute('GET', '/admin/ai/assistant/feedback-list', () => getAssistantFeedbackListMock())
+mockRoute('GET', '/admin/ai/mifa/pipeline', () => getMifaPipelineMock())
+mockRoute('POST', '/admin/ai/mifa/running', ({ data }) => setMifaRunningMock(data?.running))
+mockRoute('POST', '/admin/ai/mifa/target/confirm/:id', ({ url }) => confirmMifaTargetMock(extractId(url)))
+mockRoute('POST', '/admin/ai/mifa/link/retry/:id', ({ url }) => retryMifaLinkMock(extractId(url)))

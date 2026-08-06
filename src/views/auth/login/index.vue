@@ -54,7 +54,14 @@
             登录
           </ElButton>
 
-          <p class="default-account">默认账号：admin / 123456</p>
+          <div class="demo-accounts">
+            <span class="demo-account-label">演示账号</span>
+            <div class="demo-account-list">
+              <ElButton v-for="acc in demoAccounts" :key="acc.username" link type="primary" size="small" @click="fillAccount(acc)">
+                {{ acc.label }}
+              </ElButton>
+            </div>
+          </div>
         </ElForm>
       </div>
     </div>
@@ -85,6 +92,19 @@
     password: '123456',
     rememberPassword: true
   })
+
+  const demoAccounts = [
+    { label: '超级管理员', username: 'admin', password: '123456' },
+    { label: '值班员', username: 'duty', password: '123456' },
+    { label: '指挥员', username: 'commander', password: '123456' },
+    { label: '设备操作员', username: 'operator', password: '123456' },
+    { label: '运维管理员', username: 'maintainer', password: '123456' }
+  ]
+
+  const fillAccount = (acc: { username: string; password: string }) => {
+    formData.username = acc.username
+    formData.password = acc.password
+  }
 
   const rules = computed<FormRules>(() => ({
     username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
