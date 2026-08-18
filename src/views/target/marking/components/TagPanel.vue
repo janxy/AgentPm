@@ -90,12 +90,9 @@
                 </div>
               </template>
             </ElTableColumn>
-            <ElTableColumn label="操作" width="220" align="center" fixed="right" class-name="annot-target-marking-tag-actions">
+            <ElTableColumn label="操作" width="140" align="center" fixed="right" class-name="annot-target-marking-tag-actions">
               <template #default="{ row }">
                 <ElButton link type="primary" @click="openDetail(row)">详情</ElButton>
-                <ElButton v-roles="['值班员', '指挥员']" link :type="row.followed ? 'warning' : 'primary'" @click="toggleFollow(row)">
-                  {{ row.followed ? '取消关注' : '关注' }}
-                </ElButton>
                 <ElButton v-roles="['值班员', '指挥员']" link type="warning" @click="removeTagFromTarget(row)">移除标签</ElButton>
               </template>
             </ElTableColumn>
@@ -202,7 +199,7 @@ import { RISK_LEVEL_COLORS, RISK_LEVEL_LABELS, RISK_LEVEL_OPTIONS, TARGET_TYPE_L
 
 /**
  * 目标标注-标签管理
- * 标签维护、目标关联、标签目标筛选与查看，支持关注/取消关注快捷操作。
+ * 标签维护、目标关联、标签目标筛选与查看。
  */
 defineOptions({ name: 'TargetMarkingTagPanel' })
 
@@ -394,13 +391,6 @@ async function removeTagFromTarget(row: any) {
 
 function openDetail(row: any) {
   router.push({ name: 'TargetDetail', params: { fusionId: row.fusionId } })
-}
-
-async function toggleFollow(row: any) {
-  const next = !row.followed
-  await targetStore.updateAttentionRecord([row.fusionId], next)
-  ElMessage.success(next ? '已加入重点关注' : '已取消重点关注')
-  await loadTagTargets()
 }
 
 onMounted(async () => {
