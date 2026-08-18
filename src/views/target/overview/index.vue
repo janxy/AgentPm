@@ -48,7 +48,6 @@
         <div class="filter-spacer" />
         <ElButton v-roles="['值班员', '指挥员']" :icon="Download" @click="exportList('excel')">导出Excel</ElButton>
         <ElButton v-roles="['值班员', '指挥员']" :icon="Document" @click="exportList('csv')">导出CSV</ElButton>
-        <ElButton v-roles="['指挥员', '运维管理员']" :icon="RefreshLeft" @click="resetDemoData">重置演示数据</ElButton>
       </div>
     </ElCard>
 
@@ -143,8 +142,8 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { Document, Download, Refresh, RefreshLeft, Search } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { Document, Download, Refresh, Search } from '@element-plus/icons-vue'
 import { getTargetList } from '@/api/target'
 import { useTargetStore } from '@/store/modules/target'
 import { exportToExcel, ExcelColumn } from '@/utils/excel'
@@ -319,17 +318,6 @@ async function exportList(type: 'excel' | 'csv') {
     exportToCsv(exportColumns, rows, fileName)
   }
   ElMessage.success(`已导出 ${rows.length} 条目标`)
-}
-
-async function resetDemoData() {
-  try {
-    await ElMessageBox.confirm('重置后关注、标签与风险状态将恢复为初始演示数据，是否继续？', '重置演示数据', { type: 'warning' })
-  } catch {
-    return
-  }
-  await targetStore.resetDemoData()
-  await loadTargets()
-  ElMessage.success('演示数据已重置')
 }
 
 function pad(value: number) {
