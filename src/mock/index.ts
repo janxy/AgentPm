@@ -298,3 +298,57 @@ mockRoute('GET', '/admin/ai/mifa/pipeline', () => getMifaPipelineMock())
 mockRoute('POST', '/admin/ai/mifa/running', ({ data }) => setMifaRunningMock(data?.running))
 mockRoute('POST', '/admin/ai/mifa/target/confirm/:id', ({ url }) => confirmMifaTargetMock(extractId(url)))
 mockRoute('POST', '/admin/ai/mifa/link/retry/:id', ({ url }) => retryMifaLinkMock(extractId(url)))
+
+// ==================== 目标管控 ====================
+import {
+  getTargetListMock,
+  getTargetStatsMock,
+  getTargetDetailMock,
+  getTrajectoryMock,
+  getAlertHistoryMock,
+  getFocusListMock,
+  getFocusStatsMock,
+  updateAttentionMock,
+  updateNoteMock,
+  updateTagsMock,
+  updateRiskConfirmMock,
+  getTagsMock,
+  addTagMock,
+  updateTagMock,
+  deleteTagMock,
+  getChangeHistoryMock,
+  resetTargetDataMock
+} from './target'
+
+const decodeLastSegment = (url: string) => decodeURIComponent(url.split('/').pop() || '')
+
+mockRoute('GET', '/admin/target/list', ({ params }) => getTargetListMock(params))
+mockRoute('GET', '/admin/target/stats', () => getTargetStatsMock())
+mockRoute('GET', '/admin/target/detail/:fusionId', ({ url }) => getTargetDetailMock(decodeLastSegment(url)))
+mockRoute('GET', '/admin/target/trajectory/:fusionId', ({ url, params }) =>
+  getTrajectoryMock(decodeLastSegment(url), params)
+)
+mockRoute('GET', '/admin/target/alert-history/:fusionId', ({ url, params }) =>
+  getAlertHistoryMock(decodeLastSegment(url), params)
+)
+mockRoute('GET', '/admin/target/focus/list', ({ params }) => getFocusListMock(params))
+mockRoute('GET', '/admin/target/focus/stats', () => getFocusStatsMock())
+mockRoute('PUT', '/admin/target/attention', ({ data }) => updateAttentionMock(data?.ids, data?.followed))
+mockRoute('PUT', '/admin/target/note/:fusionId', ({ url, data }) =>
+  updateNoteMock(decodeLastSegment(url), data?.content)
+)
+mockRoute('PUT', '/admin/target/tags/:fusionId', ({ url, data }) =>
+  updateTagsMock(decodeLastSegment(url), data?.tags)
+)
+mockRoute('PUT', '/admin/target/risk-confirm/:fusionId', ({ url, data }) =>
+  updateRiskConfirmMock(decodeLastSegment(url), data)
+)
+mockRoute('GET', '/admin/target/tags', () => getTagsMock())
+mockRoute('POST', '/admin/target/tag/add', ({ data }) => addTagMock(data))
+mockRoute('PUT', '/admin/target/tag/update/:id', ({ url, data }) => updateTagMock(extractId(url), data))
+mockRoute('DELETE', '/admin/target/tag/delete/:id', ({ url }) => {
+  deleteTagMock(extractId(url))
+  return { success: true }
+})
+mockRoute('GET', '/admin/target/change-history', ({ params }) => getChangeHistoryMock(params))
+mockRoute('POST', '/admin/target/reset', () => resetTargetDataMock())

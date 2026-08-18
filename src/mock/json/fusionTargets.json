@@ -1,0 +1,517 @@
+[
+  {
+    "fusion_id": "234411344",
+    "display_id": "234411344",
+    "mmsi": "234411344",
+    "source_id": "",
+    "longitude": 118.14084836646262,
+    "latitude": 24.327838317664476,
+    "heading": 74.6,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:47:00",
+    "fusion_type": "ais",
+    "three_no_status": "",
+    "sources": {
+      "ais": [
+        {
+          "source": "fshu",
+          "mmsi": "234411344",
+          "speed": 0,
+          "speed_unit": "kn",
+          "course": 74.6,
+          "heading": 74.6,
+          "latitude": 24.3278383,
+          "longitude": 118.1408483,
+          "event_time": "2026-08-12 14:47:00"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "412444914",
+    "display_id": "412444914",
+    "mmsi": "412444914",
+    "source_id": "",
+    "longitude": 118.1415044858613,
+    "latitude": 24.33448383875372,
+    "heading": 298,
+    "speed": 0.799999,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:01",
+    "fusion_type": "ais",
+    "three_no_status": "",
+    "sources": {
+      "ais": [
+        {
+          "source": "hailanxin_radar",
+          "mmsi": "412444914",
+          "speed": 0.8,
+          "speed_unit": "kn",
+          "course": 298.2,
+          "heading": 298,
+          "latitude": 24.3344839,
+          "longitude": 118.1415044,
+          "event_time": "2026-08-12 14:49:01"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-66709",
+    "display_id": "412509527",
+    "mmsi": "412509527",
+    "source_id": "",
+    "longitude": 118.14370670130775,
+    "latitude": 24.332009982108232,
+    "heading": 158,
+    "speed": 7.699993,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:27",
+    "fusion_type": "ais",
+    "three_no_status": "",
+    "sources": {
+      "ais": [
+        {
+          "source": "hailanxin_radar",
+          "mmsi": "412509527",
+          "speed": 7.7,
+          "speed_unit": "kn",
+          "course": 158.7,
+          "heading": 158,
+          "latitude": 24.33201,
+          "longitude": 118.1437067,
+          "event_time": "2026-08-12 14:49:27"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "311001078",
+    "display_id": "311001078",
+    "mmsi": "311001078",
+    "source_id": "pwgrxgvynv3y2u655k",
+    "longitude": 118.12345015562684,
+    "latitude": 24.391531819425158,
+    "heading": 0,
+    "speed": 3.339364,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:37",
+    "fusion_type": "ais+frame_code",
+    "three_no_status": "",
+    "sources": {
+      "fence": [
+        {
+          "observation_id": "fo_1f3c3ff152f86e10ed760427192e9f364ae4cf5e5e928d9cbd7a9e853b1e0224",
+          "source_id": "pwgrxgvynv3y2u655k",
+          "data_source": "fence_push",
+          "event_epoch": 1786517236,
+          "event_time_text": "2026-08-12 14:47:16",
+          "latitude": 24.390974,
+          "longitude": 118.123893,
+          "ais_hint": {
+            "mmsi": "311001078",
+            "time_text": "20260812142912",
+            "time_epoch": 1786516152,
+            "timezone": "Asia/Shanghai",
+            "extractor_version": "fusion-raw-zlib-fallback-v1"
+          },
+          "association_method": "ais_hint"
+        }
+      ],
+      "ais": [
+        {
+          "source": "xzq",
+          "mmsi": "311001078",
+          "speed": 3.339,
+          "speed_unit": "kn",
+          "course": 125.6,
+          "heading": 125.6,
+          "latitude": 24.3916087,
+          "longitude": 118.1233327,
+          "event_time": "2026-08-12 14:49:29"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-1000017",
+    "display_id": "WARNING:NO-MMSI-1000017",
+    "mmsi": null,
+    "source_id": "",
+    "longitude": 118.14989915434253,
+    "latitude": 24.305154072849994,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:24",
+    "fusion_type": "radar",
+    "three_no_status": "unverified",
+    "sources": {
+      "xzq": {
+        "lat": 24.305154074514054,
+        "lon": 118.14989913823052,
+        "mmsi": "",
+        "name": "",
+        "speed": 0,
+        "course": 0
+      }
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-1038193",
+    "display_id": "WARNING:NO-MMSI-1038193",
+    "mmsi": null,
+    "source_id": "",
+    "longitude": 118.123894799681,
+    "latitude": 24.31842192548991,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:46:01",
+    "fusion_type": "radar",
+    "three_no_status": "unverified",
+    "sources": {
+      "hailanxin": {
+        "database_record": {
+          "target_id": "2608121444515461159",
+          "mmsi": null,
+          "lat": 24.31842194,
+          "lon": 118.12389474,
+          "epoch": 1786517161.351,
+          "received_epoch": 1786517165.654214,
+          "payload_json": "{\"key\":\"hailanxin:2608121444515461159\",\"vendor\":\"hailanxin\",\"targetId\":\"2608121444515461159\",\"sourceType\":\"RADAR\",\"lat\":24.31842194,\"lon\":118.12389474,\"timestamp\":\"2026-08-12T06:46:01.351Z\",\"course\":null,\"speed\":null,\"mmsi\":null,\"name\":null,\"_epoch\":1786517161.351,\"state\":1.0,\"radarSources\":[{\"id\":\"FuJian4053\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"}],\"eventTimeSource\":\"vendor_event\"}"
+        },
+        "provider_payload": {
+          "targetId": "2608121444515461159",
+          "mmsi": null,
+          "name": null,
+          "lat": 24.31842194,
+          "lon": 118.12389474,
+          "speed": null,
+          "course": null,
+          "heading": null,
+          "reportedCourse": null,
+          "_epoch": 1786517161.351
+        }
+      }
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-998186",
+    "display_id": "WARNING:NO-MMSI-998186",
+    "mmsi": null,
+    "source_id": "",
+    "longitude": 118.14269902019475,
+    "latitude": 24.378106535356306,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:27",
+    "fusion_type": "radar",
+    "three_no_status": "unverified",
+    "sources": {
+      "xzq": {
+        "lat": 24.378106640523768,
+        "lon": 118.14269894341226,
+        "mmsi": "",
+        "name": "",
+        "speed": 0,
+        "course": 0
+      }
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-0717",
+    "display_id": "WARNING:NO-MMSI-0717",
+    "mmsi": null,
+    "source_id": "ko9m83wnw7j88a913k",
+    "longitude": 118.1338791276444,
+    "latitude": 24.39532481511675,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:48:24",
+    "fusion_type": "frame_code",
+    "three_no_status": "unverified",
+    "sources": {
+      "fence": [
+        {
+          "observation_id": "fo_e4d4b2a18ba6a0debc7b0d46b04fcf9c2e26e03a49e1d62118493bbd43086d6f",
+          "source_id": "ko9m83wnw7j88a913k",
+          "data_source": "fence_push",
+          "event_epoch": 1786517304,
+          "event_time_text": "2026-08-12 14:48:24",
+          "latitude": 24.395325,
+          "longitude": 118.133879,
+          "ais_hint": null,
+          "association_method": "standalone"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-1038262",
+    "display_id": "WARNING:NO-MMSI-1038262",
+    "mmsi": null,
+    "source_id": "k3gjmrxw0w03qulzvp",
+    "longitude": 118.1565450253099,
+    "latitude": 24.34761597212555,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:46:47",
+    "fusion_type": "frame_code",
+    "three_no_status": "unverified",
+    "sources": {
+      "fence": [
+        {
+          "observation_id": "fo_1181335f5817f92e2bc63c18be4fe522b2b0dfb3f3cd5ad165d3c032029fc1a4",
+          "source_id": "k3gjmrxw0w03qulzvp",
+          "data_source": "fence_push",
+          "event_epoch": 1786517207,
+          "event_time_text": "2026-08-12 14:46:47",
+          "latitude": 24.347616,
+          "longitude": 118.156545,
+          "ais_hint": null,
+          "association_method": "standalone"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-990327",
+    "display_id": "WARNING:NO-MMSI-990327",
+    "mmsi": null,
+    "source_id": "pw2q0nlroqx9zh5dnp",
+    "longitude": 118.11007931814358,
+    "latitude": 24.42879554233049,
+    "heading": 0,
+    "speed": 0,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:45:03",
+    "fusion_type": "frame_code",
+    "three_no_status": "unverified",
+    "sources": {
+      "fence": [
+        {
+          "observation_id": "fo_9b35a82ebb824ffa2a42b23d46cd59272b28b25a3729d7c735c4348f76511124",
+          "source_id": "pw2q0nlroqx9zh5dnp",
+          "data_source": "fence_push",
+          "event_epoch": 1786517103,
+          "event_time_text": "2026-08-12 14:45:03",
+          "latitude": 24.428796,
+          "longitude": 118.110079,
+          "ais_hint": null,
+          "association_method": "standalone"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-1000076",
+    "display_id": "WARNING:NO-MMSI-1000076",
+    "mmsi": null,
+    "source_id": "",
+    "longitude": 118.14628357325515,
+    "latitude": 24.388107695602947,
+    "heading": 354,
+    "speed": 4.087342,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:32",
+    "fusion_type": "radar",
+    "three_no_status": "confirmed",
+    "sources": {
+      "xzq": {
+        "lat": 24.38810783208548,
+        "lon": 118.14628349044222,
+        "mmsi": "",
+        "name": "",
+        "speed": 4.087345758294892,
+        "course": 354
+      }
+    }
+  },
+  {
+    "fusion_id": "WARNING:NO-MMSI-1035042",
+    "display_id": "WARNING:NO-MMSI-1035042",
+    "mmsi": null,
+    "source_id": "",
+    "longitude": 118.14107716331152,
+    "latitude": 24.4096679407344,
+    "heading": 314.269534220181,
+    "speed": 0.102568,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:14",
+    "fusion_type": "radar",
+    "three_no_status": "confirmed",
+    "sources": {
+      "hailanxin": {
+        "database_record": {
+          "target_id": "2608121310145437414",
+          "mmsi": null,
+          "lat": 24.40966819,
+          "lon": 118.14107703,
+          "epoch": 1786517354.717,
+          "received_epoch": 1786517366.5387285,
+          "payload_json": "{\"key\":\"hailanxin:2608121310145437414\",\"vendor\":\"hailanxin\",\"targetId\":\"2608121310145437414\",\"sourceType\":\"RADAR\",\"lat\":24.40966819,\"lon\":118.14107703,\"timestamp\":\"2026-08-12T06:49:14.717Z\",\"course\":null,\"speed\":null,\"mmsi\":null,\"name\":null,\"_epoch\":1786517354.717,\"quality\":80.0,\"state\":1.0,\"duration\":4638308.0,\"distance\":15.742816,\"radarSources\":[{\"id\":\"FuJian4053\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"}],\"eventTimeSource\":\"vendor_event\"}"
+        },
+        "provider_payload": {
+          "targetId": "2608121310145437414",
+          "mmsi": null,
+          "name": null,
+          "lat": 24.40966819,
+          "lon": 118.14107703,
+          "speed": null,
+          "course": null,
+          "heading": null,
+          "reportedCourse": null,
+          "_epoch": 1786517354.717
+        }
+      }
+    }
+  },
+  {
+    "fusion_id": "412444123",
+    "display_id": "412444123",
+    "mmsi": "412444123",
+    "source_id": "",
+    "longitude": 118.13743192274384,
+    "latitude": 24.3352147558237,
+    "heading": 232,
+    "speed": 0.355253,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:21",
+    "fusion_type": "radar",
+    "three_no_status": "",
+    "sources": {
+      "hailanxin": {
+        "database_record": {
+          "target_id": "4051786276818065",
+          "mmsi": "412444123",
+          "lat": 24.33521478,
+          "lon": 118.13743188,
+          "epoch": 1786517361.238,
+          "received_epoch": 1786517366.5387285,
+          "payload_json": "{\"key\":\"hailanxin:4051786276818065\",\"vendor\":\"hailanxin\",\"targetId\":\"4051786276818065\",\"sourceType\":\"FUSED\",\"lat\":24.33521478,\"lon\":118.13743188,\"timestamp\":\"2026-08-12T06:49:21.238Z\",\"course\":232.0,\"speed\":null,\"mmsi\":\"412444123\",\"name\":\"MINLONGYU66669\",\"_epoch\":1786517361.238,\"quality\":100.0,\"state\":1.0,\"duration\":240534015.0,\"distance\":4739.4155,\"heading\":232.0,\"radarSources\":[{\"id\":\"FuJian4053\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"}],\"aisSources\":[{\"id\":\"FuJian4052\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"},{\"id\":\"FuJian1292\",\"name\":\"129混合源\",\"provider\":\"GLOBAL\"}],\"eventTimeSource\":\"vendor_event\"}"
+        },
+        "provider_payload": {
+          "targetId": "4051786276818065",
+          "mmsi": "412444123",
+          "name": "MINLONGYU66669",
+          "lat": 24.33521478,
+          "lon": 118.13743188,
+          "speed": null,
+          "course": 232,
+          "heading": 232,
+          "reportedCourse": null,
+          "_epoch": 1786517361.238
+        }
+      }
+    }
+  },
+  {
+    "fusion_id": "413699890",
+    "display_id": "413699890",
+    "mmsi": "413699890",
+    "source_id": "",
+    "longitude": 118.23905127315815,
+    "latitude": 24.35194809518638,
+    "heading": 92.8822234813124,
+    "speed": 10.673797,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:32",
+    "fusion_type": "radar+ais",
+    "three_no_status": "",
+    "sources": {
+      "hailanxin": {
+        "database_record": {
+          "target_id": "2608110759405480328",
+          "mmsi": "413699890",
+          "lat": 24.35201168,
+          "lon": 118.23858964,
+          "epoch": 1786517364.233,
+          "received_epoch": 1786517369.554644,
+          "payload_json": "{\"key\":\"hailanxin:2608110759405480328\",\"vendor\":\"hailanxin\",\"targetId\":\"2608110759405480328\",\"sourceType\":\"FUSED\",\"lat\":24.35201168,\"lon\":118.23858964,\"timestamp\":\"2026-08-12T06:49:24.233Z\",\"course\":98.30000305175781,\"speed\":10.699999809265137,\"mmsi\":\"413699890\",\"name\":\"ANSHENG20\",\"_epoch\":1786517364.233,\"quality\":100.0,\"state\":1.0,\"duration\":108817879.0,\"distance\":190509.62,\"heading\":93.0,\"reportedCourse\":98.30000305175781,\"radarSources\":[{\"id\":\"FuJian4013\",\"name\":\"01厦门观音山\",\"provider\":\"HLX\"},{\"id\":\"FuJian4053\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"}],\"aisSources\":[{\"id\":\"FuJian4102\",\"name\":\"10漳州隆教\",\"provider\":\"HLX\"},{\"id\":\"FuJian52\",\"name\":\"01厦门观音山\",\"provider\":\"HLX\"},{\"id\":\"FuJian4052\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"},{\"id\":\"FuJian1292\",\"name\":\"129混合源\",\"provider\":\"GLOBAL\"}],\"eventTimeSource\":\"vendor_event\"}"
+        },
+        "provider_payload": {
+          "targetId": "2608110759405480328",
+          "mmsi": "413699890",
+          "name": "ANSHENG20",
+          "lat": 24.35201168,
+          "lon": 118.23858964,
+          "speed": 10.699999809265137,
+          "course": 98.30000305175781,
+          "heading": 93,
+          "reportedCourse": 98.30000305175781,
+          "_epoch": 1786517364.233
+        }
+      },
+      "ais": [
+        {
+          "source": "fshu",
+          "mmsi": "413699890",
+          "speed": 10.7,
+          "speed_unit": "kn",
+          "course": 98.5,
+          "heading": 93,
+          "latitude": 24.3519923,
+          "longitude": 118.238592,
+          "event_time": "2026-08-12 14:49:26"
+        }
+      ]
+    }
+  },
+  {
+    "fusion_id": "636025181",
+    "display_id": "636025181",
+    "mmsi": "636025181",
+    "source_id": "",
+    "longitude": 118.13159484403342,
+    "latitude": 24.38835095757383,
+    "heading": 189.26230468749998,
+    "speed": 6.26606,
+    "speed_unit": "kn",
+    "event_time": "2026-08-12 14:49:38",
+    "fusion_type": "radar+ais",
+    "three_no_status": "",
+    "sources": {
+      "hailanxin": {
+        "database_record": {
+          "target_id": "4341786276647887",
+          "mmsi": "636025181",
+          "lat": 24.38891072,
+          "lon": 118.13154257,
+          "epoch": 1786517359.21,
+          "received_epoch": 1786517366.5387285,
+          "payload_json": "{\"key\":\"hailanxin:4341786276647887\",\"vendor\":\"hailanxin\",\"targetId\":\"4341786276647887\",\"sourceType\":\"FUSED\",\"lat\":24.38891072,\"lon\":118.13154257,\"timestamp\":\"2026-08-12T06:49:19.210Z\",\"course\":176.6999969482422,\"speed\":6.300000190734863,\"mmsi\":\"636025181\",\"name\":\"YICK BARGE 606\",\"_epoch\":1786517359.21,\"quality\":100.0,\"state\":1.0,\"duration\":240220034.0,\"distance\":286648.03,\"heading\":189.0,\"reportedCourse\":176.6999969482422,\"radarSources\":[{\"id\":\"FuJian4053\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"}],\"aisSources\":[{\"id\":\"FuJian52\",\"name\":\"01厦门观音山\",\"provider\":\"HLX\"},{\"id\":\"FuJian4052\",\"name\":\"05厦门岛美\",\"provider\":\"HLX\"},{\"id\":\"FuJian1292\",\"name\":\"129混合源\",\"provider\":\"GLOBAL\"}],\"eventTimeSource\":\"vendor_event\"}"
+        },
+        "provider_payload": {
+          "targetId": "4341786276647887",
+          "mmsi": "636025181",
+          "name": "YICK BARGE 606",
+          "lat": 24.38891072,
+          "lon": 118.13154257,
+          "speed": 6.300000190734863,
+          "course": 176.6999969482422,
+          "heading": 189,
+          "reportedCourse": 176.6999969482422,
+          "_epoch": 1786517359.21
+        }
+      },
+      "ais": [
+        {
+          "source": "fshu",
+          "mmsi": "636025181",
+          "speed": 6.365,
+          "speed_unit": "kn",
+          "course": 177.1,
+          "heading": 189.7,
+          "latitude": 24.3886888,
+          "longitude": 118.1314797,
+          "event_time": "2026-08-12 14:49:33"
+        }
+      ]
+    }
+  }
+]
